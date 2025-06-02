@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cracked-pillars/quarry/spell-template",
+  "title": "Pillars of Eternity 2 Ability Schema",
+  "description": "Schema for Pillars of Eternity 2: Deadfire abilities",
+  "type": "object",
+  "required": ["name", "url", "description", "activation", "effects", "origin"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the ability"
+    },
+    "url": {
+      "type": "string",
+      "description": "URL from the wiki",
+      "format": "uri"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description from the wiki"
+    },
+    "activation": {
+      "type": "string",
+      "description": "How the ability is activated",
+      "enum": ["passive", "active", "modal"]
+    },
+    "area_of_effect": {
+      "type": "string",
+      "description": "Area of effect description, e.g. '1.5m from Caster'"
+    },
+    "notes": {
+      "type": "array",
+      "description": "Additional notes about the ability",
+      "items": {
+        "type": "string"
+      }
+    },
+    "effects": {
+      "type": "array",
+      "description": "List of effects the ability has",
+      "items": {
+        "type": "object",
+        "required": ["targets", "value", "tags"],
+        "properties": {
+          "targets": {
+            "type": "array",
+            "description": "List of targets for the effect",
+            "items": {
+              "type": "string",
+              "enum": ["self", "allied_aoe", "hazard_aoe", "foe_aoe", "foe_target", "attackers", "target", "jump_targets", "summon", "target+beam", "friendly_target"]
+            },
+            "minItems": 1
+          },
+          "condition": {
+            "type": "string",
+            "description": "Trigger for the effect to apply, e.g. 'On Hit'"
+          },
+          "value": {
+            "type": "string",
+            "description": "The actual effect description"
+          },
+          "duration": {
+            "type": "number",
+            "description": "Duration of the effect in seconds"
+          },
+          "tags": {
+            "type": "array",
+            "description": "List of tags for the effect",
+            "items": {
+              "type": "string",
+              "enum": [
+                "barbarian", "chanter", "cipher", "druid", "fighter", "monk", "paladin", "priest", "ranger", "rogue", "wizard",
+                "evocation", "veil_piercing", "interrupt",
+                "slashing", "piercing", "crashing", "shock", "burn", "freeze", "corrode", "raw",
+                "illusion", "conjuration", "enchanting", "transmutation",
+                "constitution_affliction", "dexterity_affliction", "might_affliction", "intellect_affliction", "perception_affliction", "resolve_affliction",
+                "constitution_inspiration", "dexterity_inspiration", "might_inspiration", "intellect_inspiration", "perception_inspiration", "resolve_inspiration",
+                "sickened", "weakened", "enfeebled", "fit", "hardy", "robust",
+                "hobbled", "immobilized", "paralyzed", "petrified",
+                "quick", "nimble", "swift",
+                "staggered", "dazed", "stunned",
+                "strong", "tenacious", "energized",
+                "confused", "charmed", "dominated",
+                "smart", "acute", "brilliant",
+                "distracted", "disoriented", "blinded",
+                "insightful", "aware", "intuitive",
+                "shaken", "frightened", "terrified",
+                "steadfast", "resolute", "courageous",
+                "targets_deflection", "targets_reflex", "targets_fortitude", "targets_will",
+                "engagement_slots",
+                "summon_weapon", "summon_creature",
+                "mod_accuracy", "mod_deflection", "mod_reflex", "mod_fortitude", "mod_will",
+                "mod_move_speed", "prone", "mod_armour", "concentration",
+                "slashing_armour", "piercing_armour", "crashing_armour",
+                "shock_armour", "burn_armour", "freeze_armour", "corrode_armour",
+                "graze_to_hit", "hit_to_crit", "hit_to_graze", "crit_to_hit",
+                "mod_stride", "mod_action_speed",
+                "restore_health", "mod_restore_health",
+                "duplicate", "mod_spell_reflect", "spell_steal", "transform",
+                "mod_effects_duration", "mod_healing_received",
+                "untargetable",
+                "might_immunity", "constitution_immunity", "dexterity_immunity",
+                "intellect_immunity", "resolve_immunity", "perception_immunity",
+                "mod_power_level", "mod_weapon_sets",
+                "mod_recovery_time", "mod_reload_time",
+                "mod_penetration", "special",
+                "mod_ability_range", "mod_max_health", "mod_empower_points",
+                "spellcasting_disabled"
+              ]
+            }
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "origin": {
+      "type": "object",
+      "required": ["type", "value"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "How the ability is acquired",
+          "enum": ["progression", "item"]
+        },
+        "value": {
+          "oneOf": [
+            {
+              "type": "object",
+              "required": ["class", "learn_level", "level"],
+              "properties": {
+                "class": {
+                  "type": "string",
+                  "description": "Name of the class"
+                },
+                "learn_level": {
+                  "oneOf": [
+                    {"type": "integer", "minimum": 1},
+                    {"type": "string"}
+                  ],
+                  "description": "Level at which the ability is learned or a string like 'At character creation'"
+                },
+                "level": {
+                  "type": "integer",
+                  "description": "Level of the ability",
+                  "minimum": 1
+                }
+              }
+            },
+            {
+              "type": "string",
+              "description": "Name of the item"
+            }
+          ]
+        }
+      }
+    },
+    "keywords": {
+      "type": "array",
+      "description": "List of keywords for the ability",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
