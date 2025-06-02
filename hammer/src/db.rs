@@ -9,6 +9,7 @@ const MIGRATION_FILE_NAME_COLUMN: &str = "name";
 const MIGRATION_FILES_PATH: &str = "./resources/db";
 
 pub(crate) fn get_connection() -> Result<Connection, Error> {
+    // Connection::open is idempotent.
     Connection::open(DB_PATH).map_err(|_| "Failed to open a connection to the database".into())
 }
 
