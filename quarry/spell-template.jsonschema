@@ -105,7 +105,9 @@
                 "mod_recovery_time", "mod_reload_time",
                 "mod_penetration", "special",
                 "mod_ability_range", "mod_max_health", "mod_empower_points",
-                "spellcasting_disabled"
+                "spellcasting_disabled",
+                "mod_might", "mod_constitution", "mod_dexterity", "mod_intellect", "mod_perception", "mod_resolve",
+                "invisible"
               ]
             }
           }

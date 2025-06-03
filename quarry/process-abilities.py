@@ -205,9 +205,33 @@ IMPORTANT INSTRUCTIONS:
 3. Tag selection guidelines:
    - Use class tags (barbarian, chanter, etc.) to indicate with which class the ability is associated
    - Use damage type tags (slashing, piercing, burning, etc.) for direct damage effects
-   - Use affliction/inspiration tags for status effects
-   - Use mod_* tags for stat modifications
+   - Use affliction/inspiration tags for status effects:
+     - might afflictions are: staggered, dazed, stunned
+     - dexterity afflications are: hobbled, immobilized, paralyzed, petrified
+     - constitution afflictions are: sickened, weakened, enfeebled
+     - intellect afflictions are: confused, charmed, dominated
+     - perception afflictions are: distracted, disoriented, blinded
+     - resolve afflictions are: shackled, frightened, terrified
+     - might inspirations are: strong, tenacious, energized
+     - dexterity inspirations are: quick, nimble, swift
+     - constitution inspirations are: fit, hardy, robust
+     - intellect inspirations are: smart, acute, brilliant
+     - perception inspirations are: insightful, aware, intuitive
+     - resolve inspirations are: steadfast, resolute, courageous
+   - If the effect targets will, use "targets_will" tag
+   - If the effect targets reflex, use "targets_reflex" tag
+   - If the effect targets fortitude, use "targets_fortitude" tag
+   - If the effect targets deflection, use "targets_deflection" tag
+   - If the effect only lists +5 to some attribute, do not use "x_inspiration" tag,
+     instead use mod_x tag (e.g. +5 Might is mod_might, +25% action speed is mod_action_speed)
+   - If the effect only lists -5 to some attribute, do not use "x_afflication" tag,
+     instead use mod_x tag (e.g. -5 Consitution is mod_constitution, -25% action speed is mod_action_speed)
+   - Use mod_* tags for stat modifications (e.g. + 5 Might is mod_might, -5 Intellect is mod_intellect)
    - Use summon_* tags for summoning effects
+   - If the effect is +X to all defenses, use 4 tags for this effect:
+     mod_deflection, mod_fortitude, mod_reflex, mod_will
+   - If the origin mentions a class, e.g. 'Wizard' or 'Chanter', use the appropriate class tag:
+     druid, chanter, cipher, barbarian, monk, paladin, priest, rogue, wizard
    - Use special tag only if no other tag fits and the effect is unique
 
 Focus on:

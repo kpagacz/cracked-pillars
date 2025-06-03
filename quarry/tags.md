@@ -127,3 +127,10 @@
 128: mod_max_health
 129: mod_empower_points
 130: spellcasting_disabled
+131: mod_might
+132: mod_constitution
+133: mod_dexterity
+134: mod_intellect
+135: mod_perception
+136: mod_resolve
+137: invisible
