@@ -1,0 +1,49 @@
+{% macro ability_card(ability) %}
+<div class="p-6" x-data="{ showEffects: false }">
+    <div class="flex items-start justify-between">
+        <div class="flex-1">
+            <h3 class="text-lg font-medium text-gray-900">
+                <a href="{{ ability.url }}" target="_blank" class="hover:text-blue-600">
+                    {{ ability.name }}
+                </a>
+            </h3>
+            <div class="mt-1 flex flex-wrap gap-2">
+                {% for tag in ability.tags %}
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                    {{ tag }}
+                </span>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="ml-4 flex-shrink-0">
+            <button
+                @click="showEffects = !showEffects"
+                class="inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
+                <span x-text="showEffects ? 'Hide Effects' : 'Show Effects'"></span>
+            </button>
+        </div>
+    </div>
+
+    <div x-show="showEffects" x-transition class="mt-4 prose prose-sm max-w-none">
+        <div class="text-sm text-gray-500">
+            <strong>Activation:</strong> {{ ability.activation }}
+        </div>
+        {% if ability.effects %}
+        <div class="mt-2">
+            <strong>Effects:</strong>
+            <ul class="mt-1 list-disc list-inside">
+                {% for effect in ability.effects %}
+                <li>{{ effect }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% if ability.origin %}
+        <div class="mt-2">
+            <strong>Origin:</strong> {{ ability.origin }}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endmacro %}

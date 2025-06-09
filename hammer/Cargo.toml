@@ -6,7 +6,7 @@ edition = "2024"
 [dependencies]
 axum = "0.8.4"
 config = "0.15.11"
-minijinja = "2.10.2"
+tera = { version = "1.20.0", features = ["builtins"] }
 rusqlite = "0.36.0"
 serde = { version = "1.0.219", features = ["serde_derive"] }
 serde_json = "1.0.140"
@@ -15,7 +15,7 @@ tower = "0.5.2"
 tower-http = { version = "0.6.6", features = ["trace"] }
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+chrono = "0.4"
 
-[metadata.jinja-lsp]
+[metadata.tera]
 templates = "./src/frontend/templates"
-backend = "./src"
