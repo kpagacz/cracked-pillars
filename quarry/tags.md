@@ -134,3 +134,10 @@
 135: mod_perception
 136: mod_resolve
 137: invisible
+138: resistance_might
+139: resistance_constitution
+140: resistance_dexterity
+141: resistance_intellect
+142: resistance_perception
+143: resistance_resolve
+144: mod_damage

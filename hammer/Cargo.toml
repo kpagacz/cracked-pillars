@@ -5,5 +5,17 @@ edition = "2024"
 
 [dependencies]
 axum = "0.8.4"
+config = "0.15.11"
+minijinja = "2.10.2"
 rusqlite = "0.36.0"
+serde = { version = "1.0.219", features = ["serde_derive"] }
+serde_json = "1.0.140"
 tokio = { version = "1.45.1", features = ["macros", "rt-multi-thread"] }
+tower = "0.5.2"
+tower-http = { version = "0.6.6", features = ["trace"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[metadata.jinja-lsp]
+templates = "./src/frontend/templates"
+backend = "./src"

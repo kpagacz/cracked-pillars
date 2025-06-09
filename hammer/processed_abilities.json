@@ -66,7 +66,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/...And_Face_Your_Foes",
     "description": "Revives allies in the area of effect with a small amount of Health. (...And Face Your Foes) - Revived allies now receive a bonus to all defenses for a short time.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 90° Cone",
     "notes": [
       "Source cost 4 Phrases",
       "Cast time 0.5 sec",
@@ -109,7 +109,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/...And_Sip_from_the_Marrow.",
     "description": "Unleash an effect that deals Raw Damage to foes in an area. Those Near Death can explode, dealing Corrode Damage to adjacent enemies. (...And Sip from the Marrow) - Allies in the explosion are healed and gain Action Speed.",
     "activation": "active",
-    "area_of_effect": "Length: 5 60\u00b0 Cone + 2.5 Radius + Length: 2.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 5 60° Cone + 2.5 Radius + Length: 2.5 90° Cone",
     "effects": [
       {
         "targets": [
@@ -162,7 +162,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/...And_Their_Fear_Followed_Them_into_the_Foothills",
     "description": "Paralyzes enemies in the area of effect. (...And Their Fear Followed Them into the Foothills) - When the Paralyzation ends, the foes become Frightened.",
     "activation": "active",
-    "area_of_effect": "Length: 5 90\u00b0 Cone",
+    "area_of_effect": "Length: 5 90° Cone",
     "notes": [
       "Source cost 3 Phrases",
       "Cast time 0.5 sec",
@@ -291,7 +291,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/...Each_Kill_Fed_His_Fury",
     "description": "Empowers allies in the area of effect with the Strong and Steadfast Inspirations. (...Each Kill Fed His Fury) - Killing blows while under the effect extend its duration.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 90° Cone",
     "notes": [
       "Killing blows while under the effect extend its duration."
     ],
@@ -396,7 +396,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/...Its_Crash_Could_Not_Be_Denied",
     "description": "Creates a thunderous explosion that Stuns and shoves enemies in the area of effect. (...Its Crash Could Not Be Denied) - Gains an Accuracy bonus.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 90° Cone",
     "effects": [
       {
         "targets": [
@@ -452,7 +452,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/...Nor_Flame,_Nor_Thrusted_Blade",
     "description": "Increases the Slash and Shock Armor Ratings for allies in the area of effect. (...Nor Flame, Nor Thrusted Blade) - Also grants Burn and Pierce Armor.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 90° Cone",
     "notes": [
       "Upgrades fr. Not Felled by the Axe, Nor Broken by the Storm"
     ],
@@ -1138,7 +1138,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/And_Hel-Hyraf_Crashed_Upon_The_Shield_(Deadfire)",
     "description": "Reduces Armor Rating of enemies in the area of effect.",
     "activation": "active",
-    "area_of_effect": "Length: 5 90\u00b0 Cone",
+    "area_of_effect": "Length: 5 90° Cone",
     "notes": [
       "Cast time 0.5 sec",
       "Rec. time 4.0 sec (Average)",
@@ -1174,7 +1174,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/And_with_Furious_Vengeance,_Drove_Her_Dagger_into_His_Heart",
     "description": "Increases the Penetration of allies in the area.",
     "activation": "active",
-    "area_of_effect": "Length: 5 90\u00b0 Cone",
+    "area_of_effect": "Length: 5 90° Cone",
     "notes": [
       "Noise: Extremely Loud (Use) / Loud (Impact)"
     ],
@@ -1507,7 +1507,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Arc_of_Flame",
     "description": "A Level 5 active ability that casts a cone of flame, dealing Slash Burn damage and potentially inflicting Distracted, Confused, or Shaken on foes, while granting Tenacious to allies.",
     "activation": "active",
-    "area_of_effect": "Length: 5 145\u00b0 Cone + Length: 5 145\u00b0 Cone",
+    "area_of_effect": "Length: 5 145° Cone + Length: 5 145° Cone",
     "notes": [
       "Cast time: 4.5 sec (Slow)",
       "Recovery time: 3.0 sec (Fast)",
@@ -2519,7 +2519,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/At_the_Sound_of_His_Voice,_the_Killers_Froze_Stiff_(Deadfire)",
     "description": "Paralyzes enemies in the area of effect.",
     "activation": "active",
-    "area_of_effect": "Length: 5 90\u00b0 Cone",
+    "area_of_effect": "Length: 5 90° Cone",
     "notes": [
       "Source cost 3 Phrases",
       "Cast time 0.5 sec",
@@ -2597,7 +2597,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Autumn%27s_Decay_(Deadfire)",
     "description": "Creates a cone of putrefaction, causing immediate Corrosive damage and then more damage over time to any in the area of effect.",
     "activation": "active",
-    "area_of_effect": "Length: 5 90\u00b0 Cone",
+    "area_of_effect": "Length: 5 90° Cone",
     "notes": [
       "Noise: Loud (Use + Impact)",
       "Penetration: 9"
@@ -3026,7 +3026,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Barbaric_Yell_(Deadfire)",
     "description": "Let out a frightful yell, causing enemies in the area of effect to be Shaken.",
     "activation": "active",
-    "area_of_effect": "Length: 5 45\u00b0 Cone",
+    "area_of_effect": "Length: 5 45° Cone",
     "notes": [
       "Combat only",
       "Source cost 1 Rage",
@@ -3476,7 +3476,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Ben_Fidel%27s_Neck_Was_Exposed",
     "description": "Causes enemies in the area of effect to be Frightened. (Ben Fidel's Neck was Exposed) - Also applies a penalty to all Defenses.",
     "activation": "active",
-    "area_of_effect": "Length: 5 90\u00b0 Cone",
+    "area_of_effect": "Length: 5 90° Cone",
     "effects": [
       {
         "targets": [
@@ -3623,7 +3623,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Bile_Spew",
     "description": "Bile Spew is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 5 110\u00b0 Cone",
+    "area_of_effect": "Length: 5 110° Cone",
     "notes": [
       "Cast time 0.7 sec",
       "Rec. time 4.0 sec (Average)",
@@ -3667,9 +3667,9 @@
   {
     "name": "Binding Burst",
     "url": "https://pillarsofeternity.fandom.com/wiki/Binding_Burst",
-    "description": "Binding Burst is an ability in Pillars of Eternity II: Deadfire. It is an active ability that affects a 2.5 length 145\u00b0 Cone area of effect, applying Hobbled for 9.0 seconds. Its accuracy is checked against Reflex.",
+    "description": "Binding Burst is an ability in Pillars of Eternity II: Deadfire. It is an active ability that affects a 2.5 length 145° Cone area of effect, applying Hobbled for 9.0 seconds. Its accuracy is checked against Reflex.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 145\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 145° Cone",
     "notes": [
       "Cast time 0.7 sec",
       "Rec. time 4.0 sec (Average)",
@@ -3798,7 +3798,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Bladed_Sweep",
     "description": "Bladed Sweep is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 145\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 145° Cone",
     "notes": [
       "Cast time 0.7 sec",
       "Rec. time 4.5 sec (Slow)",
@@ -3890,7 +3890,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Blast_of_Frost_(Deadfire)",
     "description": "Creates a bitter surge of ice and freezing cold air, inflicting Freeze damage on anyone caught in the conical area of effect.",
     "activation": "active",
-    "area_of_effect": "Length: 5 75\u00b0 Cone",
+    "area_of_effect": "Length: 5 75° Cone",
     "notes": [
       "This spell is more dangerous than average when it comes to causing friendly fire. It has been seen happening quite regularly, and given its high damage output this can be rather devastating, so think carefully before adding it to one of your Wizards."
     ],
@@ -3926,7 +3926,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Blast_of_Frost_(Priest_of_Rymrgand)",
     "description": "Creates a bitter surge of ice and freezing cold air, inflicting Freeze damage on anyone caught in the conical area of effect.",
     "activation": "active",
-    "area_of_effect": "Length: 5 75\u00b0 Cone",
+    "area_of_effect": "Length: 5 75° Cone",
     "notes": [],
     "effects": [
       {
@@ -3969,7 +3969,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Blast_of_Frost_(Watershaper)",
     "description": "Creates a bitter surge of ice and freezing cold air, inflicting Freeze damage on anyone caught in the conical area of effect.",
     "activation": "active",
-    "area_of_effect": "Length: 5 75\u00b0 Cone",
+    "area_of_effect": "Length: 5 75° Cone",
     "notes": [
       "Cast time 3.0 sec (Average)",
       "Rec. time 4.0 sec (Average)",
@@ -4664,7 +4664,7 @@
     "description": "Draw upon your own lifeforce to fuel your magic when others could not. Receive a variable amount of Raw Damage in order to restore a spell level of equal or lesser proportion to the damage received. After use, wizard spells will receive a bonus to Power Level for a short time.",
     "activation": "active",
     "notes": [
-      "For the \"variable raw damage\", one of the following effects are picked at random: Self: 5 Raw (scales with character level, at +1 per level) \u2192 1x Power Level 1-4 Arcane Spell restored; Self: 10 Raw (scaled with character level, at +2 per level) \u2192 1x Power Level 1-7 Arcane Spell restored; Self: 15 Raw (scales with character level, at +3 per level) \u2192 1x Power Level 1-9 Arcane Spell restored."
+      "For the \"variable raw damage\", one of the following effects are picked at random: Self: 5 Raw (scales with character level, at +1 per level) → 1x Power Level 1-4 Arcane Spell restored; Self: 10 Raw (scaled with character level, at +2 per level) → 1x Power Level 1-7 Arcane Spell restored; Self: 15 Raw (scales with character level, at +3 per level) → 1x Power Level 1-9 Arcane Spell restored."
     ],
     "effects": [
       {
@@ -4909,7 +4909,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Bludgeoning_Sweep",
     "description": "Bludgeoning Sweep is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 160\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 160° Cone",
     "notes": [
       "Cast time 0.7 sec",
       "Rec. time 4.0 sec (Average)",
@@ -5083,7 +5083,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Boil_Their_Flesh_From_Skin_to_Bone_(Deadfire)",
     "description": "Unleash an effect that deals Raw Damage to foes in an area. Those Near Death can explode, dealing Corrode Damage to adjacent enemies.",
     "activation": "active",
-    "area_of_effect": "Length: 5 60\u00b0 Cone + Length: 2.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 5 60° Cone + Length: 2.5 90° Cone",
     "effects": [
       {
         "targets": [
@@ -5125,7 +5125,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Boiling_Spray_(Deadfire)",
     "description": "Everyone in the cone area of effect takes Burn damage and is pushed back.",
     "activation": "active",
-    "area_of_effect": "Length: 5 90\u00b0 Cone",
+    "area_of_effect": "Length: 5 90° Cone",
     "notes": [
       "Automatically learned by (but not exclusive to) the Watershaper druid subclass at level 7 / 10.",
       "This variant targets Foe AoE instead of all AoE, meaning allies within the area of effect will be unharmed."
@@ -5513,7 +5513,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Breath_of_Blackfire",
     "description": "A cone ability that deals Corrode and Burn damage, and can inflict Weakened and Terrified on foes.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 140\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 140° Cone",
     "notes": [
       "Cast time: 4.5 sec (Slow)",
       "Rec. time: 3.0 sec (Fast)",
@@ -5577,7 +5577,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Breath_of_Flames",
     "description": "Spews a cone of flames, dealing Burn Damage to anyone in the area and causing them to suffer Burn Damage over time.",
     "activation": "active",
-    "area_of_effect": "Length: 8 60\u00b0 Cone",
+    "area_of_effect": "Length: 8 60° Cone",
     "notes": [
       "Uses 1 per rest",
       "Cast time 0.7 sec",
@@ -5623,7 +5623,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Breath_of_the_Void",
     "description": "Breath of the Void is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "2.5 Radius + Length: 7 90\u00b0 Cone",
+    "area_of_effect": "2.5 Radius + Length: 7 90° Cone",
     "notes": [
       "The Crush damage and Pull occurs to targets in the AoE radius, while the Corrode damage and Terrified status effect occurs in a cone from the caster"
     ],
@@ -5680,7 +5680,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Brutal_Cleave",
     "description": "Brutal Cleave is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 160\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 160° Cone",
     "notes": [
       "The max health debuff does not apply on Easy or \"Story Time\" difficulty."
     ],
@@ -6187,7 +6187,7 @@
     "origin": {
       "type": "progression",
       "value": {
-        "class": "Flame N\u0101ga",
+        "class": "Flame Nāga",
         "learn_level": 8,
         "level": 8
       }
@@ -8456,7 +8456,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Clear_Out_(Tentacle)",
     "description": "Clear Out is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 4 160\u00b0 Cone",
+    "area_of_effect": "Length: 4 160° Cone",
     "notes": [
       "Cast time: 0.7 sec",
       "Recovery time: 3.0 sec (Fast)",
@@ -8562,7 +8562,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Cleave",
     "description": "Cleave is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 3 160\u00b0 Cone",
+    "area_of_effect": "Length: 3 160° Cone",
     "notes": [
       "Cast time: 4.5 sec (Slow)",
       "Recovery time: 4.0 sec (Average)",
@@ -10111,7 +10111,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Corrosive_Breath",
     "description": "The user releases a blast of acid, dealing Corrode damage and causing Frightened.",
     "activation": "active",
-    "area_of_effect": "Length: 5 65\u00b0 Cone",
+    "area_of_effect": "Length: 5 65° Cone",
     "effects": [
       {
         "targets": [
@@ -10150,7 +10150,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Corrosive_Breath_(Adra_Animat)",
     "description": "Corrosive Breath is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 70\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 70° Cone",
     "notes": [
       "Cast time 3.0 sec (Average)",
       "Rec. time 4.0 sec (Average)",
@@ -10472,7 +10472,7 @@
     "origin": {
       "type": "progression",
       "value": {
-        "class": "M\u00eanp\u0175gra",
+        "class": "Mênpŵgra",
         "learn_level": 1,
         "level": 1
       }
@@ -13530,7 +13530,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Draining_Freeze",
     "description": "Draining Freeze is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Foe Target + Length: 2.5 120\u00b0 Cone",
+    "area_of_effect": "Foe Target + Length: 2.5 120° Cone",
     "notes": [
       "Combat only",
       "Cast time: 3.0 sec (Average)",
@@ -13886,7 +13886,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Echoing_Scream",
     "description": "Echoing Scream is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 5 120\u00b0 Cone + Length: 5 120\u00b0 Cone",
+    "area_of_effect": "Length: 5 120° Cone + Length: 5 120° Cone",
     "notes": [
       "Combat only",
       "Cast time: 0.7 sec",
@@ -14804,7 +14804,7 @@
     "origin": {
       "type": "progression",
       "value": {
-        "class": "Poison N\u0101ga Skirmisher",
+        "class": "Poison Nāga Skirmisher",
         "learn_level": 1,
         "level": 1
       }
@@ -15872,7 +15872,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Fan_of_Flames_(Deadfire)",
     "description": "Creates a cone of fire in front of the caster, causing Burn damage to anyone in the area of effect.",
     "activation": "active",
-    "area_of_effect": "Length: 5 120\u00b0 Cone",
+    "area_of_effect": "Length: 5 120° Cone",
     "notes": [
       "Cast time 3.0 sec (Average)",
       "Rec. time 4.0 sec (Average)",
@@ -15911,7 +15911,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Fan_of_Flames_(Priest_of_Magran)",
     "description": "Creates a cone of fire in front of the caster, causing Burn damage to anyone in the area of effect.",
     "activation": "active",
-    "area_of_effect": "Length: 5 120\u00b0 Cone",
+    "area_of_effect": "Length: 5 120° Cone",
     "notes": [
       "Cast time: 3.0 sec (Average)",
       "Recovery time: 4.0 sec (Average)",
@@ -18649,7 +18649,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Frost_Breath",
     "description": "Frost Breath is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Foe Target + Length: 2.5 120\u00b0 Cone",
+    "area_of_effect": "Foe Target + Length: 2.5 120° Cone",
     "effects": [
       {
         "targets": [
@@ -18758,7 +18758,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Frozen_Blast",
     "description": "Frozen Blast is an ability in Pillars of Eternity II: Deadfire.",
     "activation": "active",
-    "area_of_effect": "Length: 5 90\u00b0 Cone",
+    "area_of_effect": "Length: 5 90° Cone",
     "notes": [
       "Cast time 0.7 sec",
       "Rec. time 4.0 sec (Average)",
@@ -18846,7 +18846,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Furnace",
     "description": "Furnace is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 5 120\u00b0 Cone",
+    "area_of_effect": "Length: 5 120° Cone",
     "notes": [],
     "effects": [
       {
@@ -18924,7 +18924,7 @@
     ],
     "origin": {
       "type": "item",
-      "value": "Mohor\u0101 Tanga"
+      "value": "Mohorā Tanga"
     }
   },
   {
@@ -19025,7 +19025,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Garland%27s_Breath",
     "description": "Calls forth the breath of the ice troll, Garland. Attacks enemies in a cone, dealing Freeze Damage, encasing them in ice, and petrifying them.",
     "activation": "active",
-    "area_of_effect": "Length: 5 65\u00b0 Cone",
+    "area_of_effect": "Length: 5 65° Cone",
     "notes": [
       "Uses 2 per rest",
       "Cast time 0.7 sec",
@@ -19403,7 +19403,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Ghost_Blades_(Deadfire)",
     "description": "Calls a field of unearthly blades into existence, inflicting immediate Slash or Pierce damage and Hobbling enemies in the area of effect.",
     "activation": "active",
-    "area_of_effect": "Length: 5 145\u00b0 Cone",
+    "area_of_effect": "Length: 5 145° Cone",
     "notes": [
       "Cast time 3.0 sec (Average)",
       "Rec. time 4.0 sec (Average)",
@@ -19490,9 +19490,9 @@
   {
     "name": "Glacial Swipe",
     "url": "https://pillarsofeternity.fandom.com/wiki/Glacial_Swipe",
-    "description": "Glacial Swipe is an ability in Pillars of Eternity II: Deadfire. It is an active ability that affects foes in a 160\u00b0 cone, dealing Freeze and Slash damage and potentially Staggering them.",
+    "description": "Glacial Swipe is an ability in Pillars of Eternity II: Deadfire. It is an active ability that affects foes in a 160° cone, dealing Freeze and Slash damage and potentially Staggering them.",
     "activation": "active",
-    "area_of_effect": "Length: 5 160\u00b0 Cone",
+    "area_of_effect": "Length: 5 160° Cone",
     "notes": [
       "Cast time 0.5 sec",
       "Rec. time 4.0 sec (Average)",
@@ -19671,7 +19671,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Goring_Sweep",
     "description": "Goring Sweep is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 5 90\u00b0 Cone",
+    "area_of_effect": "Length: 5 90° Cone",
     "notes": [
       "Cast time 0.5 sec",
       "Rec. time 4.0 sec (Average)",
@@ -20178,7 +20178,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Gunner%27s_Fire",
     "description": "Gunner's Fire is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 145\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 145° Cone",
     "notes": [
       "Cast time 1.0 sec",
       "Rec. time 4.0 sec (Average)",
@@ -20306,7 +20306,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Gutting_Strike",
     "description": "Gutting Strike is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 4 160\u00b0 Cone",
+    "area_of_effect": "Length: 4 160° Cone",
     "notes": [
       "Combat only",
       "Cast time 0.7 sec",
@@ -20848,7 +20848,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Head_Strike_(Porokoa)",
     "description": "Head Strike is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 6 110\u00b0 Cone",
+    "area_of_effect": "Length: 6 110° Cone",
     "notes": [
       "Cast time: 0.5 sec",
       "Rec. time: 3.0 sec (Fast)",
@@ -21239,7 +21239,7 @@
     ],
     "origin": {
       "type": "item",
-      "value": "Mohor\u0101 Tanga"
+      "value": "Mohorā Tanga"
     }
   },
   {
@@ -21349,7 +21349,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Her_Revenge_Swept_Across_the_Land",
     "description": "Drains electrostatic energy from the environment to create three bolts of lightning causing Shock damage to any in their path. (Her Revenge Swept Across the Land) - These bolts now bounce to additional targets.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 90\u00b0 Cone + 1 Foe Jump Target",
+    "area_of_effect": "Length: 2.5 90° Cone + 1 Foe Jump Target",
     "notes": [
       "One of few abilities whose Accuracy scales by +2 per power level instead of +1."
     ],
@@ -21567,7 +21567,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/His_Heart_Did_Fill_With_the_Light_of_the_Dawn!",
     "description": "Restores some power pool resource for allies in the area.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 90° Cone",
     "notes": [
       "Noise Extremely Loud (Use) / Loud (Impact)"
     ],
@@ -21669,7 +21669,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/His_Laughter_Rang_Through_the_Halls",
     "description": "Unleash an explosion of voice that knocks foes back and Dazes them.",
     "activation": "active",
-    "area_of_effect": "Length: 5 90\u00b0 Cone",
+    "area_of_effect": "Length: 5 90° Cone",
     "effects": [
       {
         "targets": [
@@ -22136,7 +22136,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Hylean_Squall",
     "description": "Brings forth a rush of gusting wind, dealing Crush damage, pushing enemies back, and reducing their Stride.",
     "activation": "active",
-    "area_of_effect": "Length: 5 60\u00b0 Cone",
+    "area_of_effect": "Length: 5 60° Cone",
     "notes": [
       "Uses 1 per rest",
       "Cast time 1.1 sec",
@@ -24003,7 +24003,7 @@
     "description": "Creates a ball of energy in the caster's hand that can be thrown at an enemy, causing Burn, Freeze, Corrode, or Shock damage to anyone caught in the area of effect. Blights are continually cycled and replenished until the spell ends.",
     "activation": "active",
     "notes": [
-      "Blights are cycled every 6 seconds, in the following order: Burn \u2192 Corrode \u2192 Freeze \u2192 Shock .",
+      "Blights are cycled every 6 seconds, in the following order: Burn → Corrode → Freeze → Shock .",
       "The overall duration, as well as the duration of each blight scales with Intellect , somewhat uniformly so that most of the time only one cycle will be completed (with a bit left over)."
     ],
     "effects": [
@@ -25856,7 +25856,7 @@
     ],
     "origin": {
       "type": "item",
-      "value": "Glasanam Arg\u00fbes"
+      "value": "Glasanam Argûes"
     }
   },
   {
@@ -25916,7 +25916,7 @@
     ],
     "origin": {
       "type": "item",
-      "value": "Kaih\u014da"
+      "value": "Kaihōa"
     }
   },
   {
@@ -25954,7 +25954,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Lover%27s_Embrace_(ability)",
     "description": "Foe AoE: Charmed for 12.0 sec | Accuracy vs. Will",
     "activation": "active",
-    "area_of_effect": "Length: 2 120\u00b0 Cone",
+    "area_of_effect": "Length: 2 120° Cone",
     "notes": [
       "Cast time: 0.7 sec",
       "Rec. time: 4.0 sec (Average)",
@@ -27339,7 +27339,7 @@
     ],
     "origin": {
       "type": "item",
-      "value": "Mohor\u0101 Tanga"
+      "value": "Mohorā Tanga"
     }
   },
   {
@@ -27464,7 +27464,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Mind_Wave_(Deadfire)",
     "description": "The cipher violently lashes out at an enemy, dealing Raw Damage and generating a cone of concussive force behind the target.",
     "activation": "active",
-    "area_of_effect": "Foe Target + Length: 5 135\u00b0 Cone",
+    "area_of_effect": "Foe Target + Length: 5 135° Cone",
     "notes": [],
     "effects": [
       {
@@ -28301,12 +28301,12 @@
     }
   },
   {
-    "name": "Mu\u0101tu's Aid",
+    "name": "Muātu's Aid",
     "url": "https://pillarsofeternity.fandom.com/wiki/Mu%C4%81tu%27s_Aid",
-    "description": "The wielder summons Mu\u0101tu to their side. Mu\u0101tu's attacks heal the wielder if they are nearby and become more powerful as he is empowered by the souls of the Crucible.",
+    "description": "The wielder summons Muātu to their side. Muātu's attacks heal the wielder if they are nearby and become more powerful as he is empowered by the souls of the Crucible.",
     "activation": "active",
     "notes": [
-      "The effects of Mu\u0101tu's Aid are increased as Mu\u0101tu is empowered with the souls of the Crucible during Seeker, Slayer, Survivor.",
+      "The effects of Muātu's Aid are increased as Muātu is empowered with the souls of the Crucible during Seeker, Slayer, Survivor.",
       "Healing bonus scales from 10% to 30%.",
       "Might bonus scales from 0 to 4."
     ],
@@ -28315,7 +28315,7 @@
         "targets": [
           "summon"
         ],
-        "value": "Summon: Mu\u0101tu",
+        "value": "Summon: Muātu",
         "duration": 30.0,
         "tags": [
           "summon_creature"
@@ -28335,8 +28335,8 @@
         "targets": [
           "self"
         ],
-        "condition": "Mu\u0101tu's attacks",
-        "value": "Mu\u0101tu's attacks convert 10% of primary weapon damage dealt to Healing for the wielder (scales up to 30%). The healing applies in an 5m AoE around Mu\u0101tu, but only to the character with Mu\u0101tu's Head equipped.",
+        "condition": "Muātu's attacks",
+        "value": "Muātu's attacks convert 10% of primary weapon damage dealt to Healing for the wielder (scales up to 30%). The healing applies in an 5m AoE around Muātu, but only to the character with Muātu's Head equipped.",
         "tags": [
           "restore_health"
         ]
@@ -28344,7 +28344,7 @@
     ],
     "origin": {
       "type": "item",
-      "value": "Mu\u0101tu's Head"
+      "value": "Muātu's Head"
     }
   },
   {
@@ -28561,7 +28561,7 @@
     "origin": {
       "type": "progression",
       "value": {
-        "class": "P\u0175gra",
+        "class": "Pŵgra",
         "learn_level": "Automatic",
         "level": 1
       }
@@ -29301,7 +29301,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Not_Felled_by_the_Axe,_Nor_Broken_by_the_Storm_(Deadfire)",
     "description": "Increases the Slash and Shock Armor Ratings for allies in the area of effect.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 90° Cone",
     "notes": [
       "Source cost 3 Phrases",
       "Cast time 0.5 sec",
@@ -30479,7 +30479,7 @@
         "targets": [
           "target"
         ],
-        "condition": "if health \u2264 25%",
+        "condition": "if health ≤ 25%",
         "value": "Paralyzed ( Petrified ) permanently",
         "tags": [
           "paralyzed",
@@ -30720,7 +30720,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Piercing_Shriek",
     "description": "Piercing Shriek is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 1.5 140\u00b0 Cone",
+    "area_of_effect": "Length: 1.5 140° Cone",
     "notes": [
       "Noise Quiet (Use + Impact)"
     ],
@@ -30956,7 +30956,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Plague_Wind",
     "description": "Plague Wind is an ability in Pillars of Eternity II: Deadfire.",
     "activation": "active",
-    "area_of_effect": "Length: 5 140\u00b0 Cone",
+    "area_of_effect": "Length: 5 140° Cone",
     "notes": [
       "Cast time: 4.5 sec (Slow)",
       "Recovery time: 4.0 sec (Average)",
@@ -31506,7 +31506,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Psychic_Blast",
     "description": "Psychic Blast is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 5 60\u00b0 Cone",
+    "area_of_effect": "Length: 5 60° Cone",
     "notes": [
       "Cast time 0.7 sec",
       "Rec. time 4.0 sec (Average)",
@@ -31859,7 +31859,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Putrid_Blast",
     "description": "Putrid Blast is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 5 90\u00b0 Cone",
+    "area_of_effect": "Length: 5 90° Cone",
     "effects": [
       {
         "targets": [
@@ -31913,7 +31913,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Putrid_Breath",
     "description": "Putrid Breath is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 10 100\u00b0 Cone",
+    "area_of_effect": "Length: 10 100° Cone",
     "effects": [
       {
         "targets": [
@@ -32183,7 +32183,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Raking_Slash_(Assassin_Vine)",
     "description": "Raking Slash is an ability in Pillars of Eternity II: Deadfire.",
     "activation": "active",
-    "area_of_effect": "Length: 3 140\u00b0 Cone",
+    "area_of_effect": "Length: 3 140° Cone",
     "notes": [
       "Cast time: 0.7 sec",
       "Recovery time: 4.0 sec (Average)",
@@ -32220,7 +32220,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Raking_Slash_(Guardian_of_Ukaizo)",
     "description": "Raking Slash is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Target + Length: 5 140\u00b0 Cone",
+    "area_of_effect": "Target + Length: 5 140° Cone",
     "notes": [
       "Cast time 0.5 sec",
       "Rec. time 4.0 sec (Average)",
@@ -32707,7 +32707,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Reeling_Blow",
     "description": "Cone attack that sends targets flying backward with a chance to Stun.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 65\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 65° Cone",
     "notes": [
       "Uses 1 per rest",
       "Cast time 0.5 sec",
@@ -33144,7 +33144,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Reny_Daret%27s_Ghost_Spake,_%22I%27ll_Catch_You,_Ben_Fidel%22_(Deadfire)",
     "description": "Causes enemies in the area of effect to be Frightened.",
     "activation": "active",
-    "area_of_effect": "Length: 5 90\u00b0 Cone",
+    "area_of_effect": "Length: 5 90° Cone",
     "effects": [
       {
         "targets": [
@@ -33783,7 +33783,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Rise_Again,_Rise_Again,_Scions_of_Adon!_(Deadfire)",
     "description": "Revives allies in the area of effect with a small amount of Health.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 90° Cone",
     "notes": [
       "Source cost 4 Phrases",
       "Cast time 0.5 sec",
@@ -34629,7 +34629,7 @@
     "description": "Kills friendly characters, or enemies that are Near Death.",
     "activation": "active",
     "notes": [
-      "As a reminder, \"Near Death\" is \u2264 25% Health."
+      "As a reminder, \"Near Death\" is ≤ 25% Health."
     ],
     "effects": [
       {
@@ -35197,7 +35197,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Screech",
     "description": "Screech is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 5 180\u00b0 Cone",
+    "area_of_effect": "Length: 5 180° Cone",
     "notes": [
       "Combat only",
       "Cast time: 4.5 sec (Slow)",
@@ -35551,7 +35551,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Set_to_Their_Purpose,_They_All_Knew_Their_Part",
     "description": "Empowers allies in the area of effect with the Quick and Insightful Inspirations. (Set to Their Purpose, They All Knew Their Part) - Allies now also gain the Smart Inspiration.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 90° Cone",
     "notes": [
       "This ability is the only instance of an Area of Effect Dexterity inspiration in the game."
     ],
@@ -36702,7 +36702,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Shatter_their_Shackles,_Cast_off_their_Chains!_(Deadfire)",
     "description": "Removes Dexterity Affliction effects for allies in the area of effect.",
     "activation": "active",
-    "area_of_effect": "Length: 5 90\u00b0 Cone",
+    "area_of_effect": "Length: 5 90° Cone",
     "notes": [
       "Noise Extremely Loud (Use) / Loud (Impact)",
       "Upgrades to The Prisoners Turned on Their Captors"
@@ -37103,7 +37103,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Shocking_Sweep",
     "description": "Shocking Sweep is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 9 30\u00b0 Cone",
+    "area_of_effect": "Length: 9 30° Cone",
     "notes": [
       "Cast time: 1.0 sec",
       "Rec. time: 4.5 sec (Slow)",
@@ -37153,7 +37153,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Shout_of_Hosts",
     "description": "Launches a cone attack that can knock back and Stun targets in the area of effect.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 90° Cone",
     "effects": [
       {
         "targets": [
@@ -37441,7 +37441,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Siren%27s_Wail",
     "description": "Siren's Wail is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 5 120\u00b0 Cone + Length: 5 120\u00b0 Cone",
+    "area_of_effect": "Length: 5 120° Cone + Length: 5 120° Cone",
     "notes": [
       "Cast time: 4.5 sec (Slow)",
       "Recovery time: 3.0 sec (Fast)",
@@ -37588,7 +37588,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Slave%27s_Revenge",
     "description": "Slave's Revenge is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Target + Length: 2 145\u00b0 Cone",
+    "area_of_effect": "Target + Length: 2 145° Cone",
     "notes": [
       "Cast time 0.5 sec",
       "Rec. time 4.0 sec (Average)",
@@ -38349,7 +38349,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Spider%27s_Flurry",
     "description": "The wielder rapidly stabs the area in front of them, dealing damage and applying Immobilized.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 90\u00b0 Cone + Length: 2.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 90° Cone + Length: 2.5 90° Cone",
     "notes": [
       "Uses 1 per encounter",
       "Cast time 0.5 sec",
@@ -39340,7 +39340,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Spray_of_Ice",
     "description": "Spray of Ice is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 145\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 145° Cone",
     "notes": [
       "Cast time 4.5 sec (Slow)",
       "Rec. time 4.0 sec (Average)",
@@ -40945,7 +40945,7 @@
     "origin": {
       "type": "progression",
       "value": {
-        "class": "Poison N\u0101ga Shaman",
+        "class": "Poison Nāga Shaman",
         "learn_level": 1,
         "level": 1
       }
@@ -42212,7 +42212,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Tail_Whip",
     "description": "Foe AoE: 18-26 Crush | Accuracy vs. Deflection",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 90° Cone",
     "notes": [
       "Cast time: 0.7 sec",
       "Recovery time: 4.0 sec (Average)",
@@ -42943,7 +42943,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/The_Bride_Caught_their_Ruse_and_Set_to_Make_them_Pay_(Deadfire)",
     "description": "Empowers allies in the area of effect with the Quick and Insightful Inspirations.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 90° Cone",
     "notes": [
       "This ability is the only instance of an Area of Effect Dexterity inspiration in the game."
     ],
@@ -42980,7 +42980,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/The_Brideman_Slew_Thirty_%27Fore_They_Crossed_Half_the_Hall_(Deadfire)",
     "description": "Empowers allies in the area of effect with the Strong and Steadfast Inspirations.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 90° Cone",
     "notes": [
       "Source cost: 4 Phrases",
       "Cast time: 0.5 sec",
@@ -43342,7 +43342,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/The_Lover_Cried_out_to_the_Beloved,_%22I_am_Yours!%22_(Deadfire)",
     "description": "Stirs something deep inside enemies in the area of effect, Charming them.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 90° Cone",
     "notes": [
       "Source cost 4 Phrases",
       "Cast time 0.5 sec",
@@ -43384,7 +43384,7 @@
     "activation": "active",
     "area_of_effect": "8m",
     "notes": [
-      "Requires \u2264 50% Health",
+      "Requires ≤ 50% Health",
       "Combat only",
       "Uses: 1 per encounter",
       "Cast time: 0.5 sec",
@@ -43506,7 +43506,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/The_Prisoners_Turned_on_Their_Captors",
     "description": "Removes Dexterity Affliction effects for allies in the area of effect. Characters that have Dexterity effects cleared now gain the Strong Inspiration.",
     "activation": "active",
-    "area_of_effect": "Length: 5 90\u00b0 Cone",
+    "area_of_effect": "Length: 5 90° Cone",
     "effects": [
       {
         "targets": [
@@ -43617,7 +43617,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/The_Shield_Cracks",
     "description": "Reduces Armor Rating of enemies in the area of effect. (The Shield Cracks) - Each time the enemy takes damage, the effect's duration is increased.",
     "activation": "active",
-    "area_of_effect": "Length: 5 90\u00b0 Cone",
+    "area_of_effect": "Length: 5 90° Cone",
     "notes": [
       "The duration increases by 2.0 sec each time the enemy takes damage (stacks infinitely)"
     ],
@@ -43686,7 +43686,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/The_Thunder_Rolled_Like_Waves_on_Black_Seas_(Deadfire)",
     "description": "Creates a thunderous explosion that Stuns and shoves enemies in the area of effect.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 90° Cone",
     "notes": [
       "Noise: Extremely Loud (Use) / Loud (Impact)"
     ],
@@ -43978,7 +43978,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Thrice_Was_She_Wronged,_and_Thrice_Justly_Avenged_(Deadfire)",
     "description": "Drains electrostatic energy from the environment to create three bolts of lightning causing Shock damage to any in their path.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 90° Cone",
     "notes": [
       "One of few abilities whose Accuracy scales by +2 per power level instead of +1."
     ],
@@ -44133,7 +44133,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Thunderous_Report",
     "description": "A copious powder load creates a blast that hits all targets in a cone, inflicting Burn/Crush Damage, knocking them back, and Dazing them.",
     "activation": "active",
-    "area_of_effect": "Length: 6.5 55\u00b0 Cone",
+    "area_of_effect": "Length: 6.5 55° Cone",
     "notes": [
       "Uses 1 per encounter",
       "Cast time 1.1 sec",
@@ -44327,7 +44327,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Together_They_Slew_Forth_a_River_of_Red",
     "description": "Stirs something deep inside enemies in the area of effect, Charming them. (Together They Slew Forth a River of Red) - While Charmed, enemies deal more damage.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 90° Cone",
     "notes": [
       "Noise: Extremely Loud (Use) / Loud (Impact)",
       "Upgrades fr. The Lover Cried out to the Beloved, \"I am Yours!\""
@@ -44529,7 +44529,7 @@
     ]
   },
   {
-    "name": "Totem's Destruction (Coral N\u0101ga Totem)",
+    "name": "Totem's Destruction (Coral Nāga Totem)",
     "url": "https://pillarsofeternity.fandom.com/wiki/Totem%27s_Destruction_(Coral_N%C4%81ga_Totem)",
     "description": "Totem's Destruction is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
@@ -44578,11 +44578,11 @@
     ],
     "origin": {
       "type": "item",
-      "value": "Coral N\u0101ga Totem"
+      "value": "Coral Nāga Totem"
     }
   },
   {
-    "name": "Totem's Destruction (Flame N\u0101ga Totem)",
+    "name": "Totem's Destruction (Flame Nāga Totem)",
     "url": "https://pillarsofeternity.fandom.com/wiki/Totem%27s_Destruction_(Flame_N%C4%81ga_Totem)",
     "description": "Totem's Destruction is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
@@ -44631,11 +44631,11 @@
     ],
     "origin": {
       "type": "item",
-      "value": "Flame N\u0101ga Totem"
+      "value": "Flame Nāga Totem"
     }
   },
   {
-    "name": "Totem's Destruction (Poison N\u0101ga Totem)",
+    "name": "Totem's Destruction (Poison Nāga Totem)",
     "url": "https://pillarsofeternity.fandom.com/wiki/Totem%27s_Destruction_(Poison_N%C4%81ga_Totem)",
     "description": "Totem's Destruction is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
@@ -44684,7 +44684,7 @@
     ],
     "origin": {
       "type": "item",
-      "value": "Poison N\u0101ga Totem"
+      "value": "Poison Nāga Totem"
     }
   },
   {
@@ -44982,7 +44982,7 @@
     "origin": {
       "type": "progression",
       "value": {
-        "class": "Poison N\u0101ga Skirmisher",
+        "class": "Poison Nāga Skirmisher",
         "learn_level": "Automatic",
         "level": 1
       }
@@ -45153,7 +45153,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Trotter_Kick",
     "description": "Trotter Kick is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 5 90\u00b0 Cone",
+    "area_of_effect": "Length: 5 90° Cone",
     "notes": [
       "Cast time: 0.7 sec",
       "Rec. time: 4.0 sec (Average)",
@@ -45760,7 +45760,7 @@
     "notes": [
       "This article or section refers to content that has been cut from the final release of the game. It may include partially developed content, content existing within game files but not fully present or usable in game, and/or early and unreleased concepts.",
       "The ability was cut from the game.",
-      "Since Vielo Vid\u00f2rio (in Pillars of Eternity ) is a unique ability available only to Frerm\u00e0s mes Canc Suolias paladins , it was probably intended to be a unique upgrade of Flames of Devotion reserved for Frerm\u00e0s paladins.",
+      "Since Vielo Vidòrio (in Pillars of Eternity ) is a unique ability available only to Frermàs mes Canc Suolias paladins , it was probably intended to be a unique upgrade of Flames of Devotion reserved for Frermàs paladins.",
       "It is still referenced in some AI behaviours, but is otherwise unused."
     ],
     "effects": [
@@ -45842,7 +45842,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Vile_Thorns_(Deadfire)",
     "description": "Shoots sharp-thorned brambles at nearby enemies, causing Pierce damage and potentially Sickening anyone in the area of effect.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 90° Cone",
     "effects": [
       {
         "targets": [
@@ -45886,7 +45886,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Vile_Thorns_(Harvester_of_Gaun)",
     "description": "Shoots sharp-thorned brambles at nearby enemies, causing Pierce damage and potentially Sickening anyone in the area of effect.",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 90° Cone",
     "effects": [
       {
         "targets": [
@@ -46000,7 +46000,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Visage_of_Skaen",
     "description": "Visage of Skaen is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 120\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 120° Cone",
     "notes": [
       "Cast time 4.5 sec (Slow)",
       "Rec. time 3.0 sec (Fast)",
@@ -46128,7 +46128,7 @@
     "url": "https://pillarsofoeternity.fandom.com/wiki/Vomit_Blood",
     "description": "Vomit Blood is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 180\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 180° Cone",
     "notes": [
       "Cast time: 0.5 sec",
       "Rec. time: 4.0 sec (Average)",
@@ -46166,7 +46166,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Vulnerable_Strike",
     "description": "Vulnerable Strike is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 2.5 180\u00b0 Cone",
+    "area_of_effect": "Length: 2.5 180° Cone",
     "notes": [
       "Combat only",
       "Cast time: 0.7 sec",
@@ -47774,7 +47774,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Wing_Buffet",
     "description": "Wing Buffet is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "active",
-    "area_of_effect": "Length: 5 180\u00b0 Cone",
+    "area_of_effect": "Length: 5 180° Cone",
     "notes": [
       "Cast time 0.7 sec",
       "Rec. time 4.0 sec (Average)",
@@ -47810,7 +47810,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Winter_Wind_(Deadfire)",
     "description": "Causes an icy wind of incredible power to arise, pushing back all in the area of effect and inflicting Freeze damage.",
     "activation": "active",
-    "area_of_effect": "Length: 5 60\u00b0 Cone",
+    "area_of_effect": "Length: 5 60° Cone",
     "notes": [
       "Counters Fire"
     ],
@@ -48296,7 +48296,7 @@
     "notes": [
       "The Paladin deals +20% Damage to Marked targets via the Sworn Enemy passive.",
       "The ability's Penetration does not scale with level.",
-      "Unique to Pallegina mes R\u00e8i, the only Frerm\u00e0s mes Canc Suolias member in the game."
+      "Unique to Pallegina mes Rèi, the only Frermàs mes Canc Suolias member in the game."
     ],
     "effects": [
       {
@@ -49635,7 +49635,7 @@
         "targets": [
           "self"
         ],
-        "condition": "while threatened by \u2265 3 enemies",
+        "condition": "while threatened by ≥ 3 enemies",
         "value": "+20% Action Speed",
         "tags": [
           "mod_action_speed"
@@ -49657,7 +49657,7 @@
         "targets": [
           "self"
         ],
-        "condition": "When Stealthed or Invisible and attacking targets \u2264 2m distance",
+        "condition": "When Stealthed or Invisible and attacking targets ≤ 2m distance",
         "value": "+100% Damage with weapons",
         "tags": [
           "rogue",
@@ -49712,7 +49712,7 @@
         "targets": [
           "attackers"
         ],
-        "condition": "While \u2264 50% Health and On Hit (melee)",
+        "condition": "While ≤ 50% Health and On Hit (melee)",
         "value": "2-4 Burn",
         "tags": [
           "burn",
@@ -49723,7 +49723,7 @@
         "targets": [
           "self"
         ],
-        "condition": "While \u2264 50% Health",
+        "condition": "While ≤ 50% Health",
         "value": "+1 Armor Rating",
         "tags": [
           "mod_armour"
@@ -50988,7 +50988,7 @@
         "targets": [
           "self"
         ],
-        "condition": "While Bloodied (\u2264 50% Health)",
+        "condition": "While Bloodied (≤ 50% Health)",
         "value": "+5 All Defenses",
         "tags": [
           "mod_deflection",
@@ -51095,7 +51095,7 @@
         "targets": [
           "self"
         ],
-        "condition": "Health \u2264 50%",
+        "condition": "Health ≤ 50%",
         "value": "+25% Damage",
         "tags": [
           "barbarian"
@@ -51172,7 +51172,7 @@
         "targets": [
           "self"
         ],
-        "condition": "against \u2264 25% health targets",
+        "condition": "against ≤ 25% health targets",
         "value": "20% of Hits converted to Crits with weapons",
         "tags": [
           "barbarian",
@@ -51183,7 +51183,7 @@
         "targets": [
           "self"
         ],
-        "condition": "against \u2264 25% health targets",
+        "condition": "against ≤ 25% health targets",
         "value": "+50% Crit damage with weapons",
         "tags": [
           "barbarian",
@@ -51329,7 +51329,10 @@
         "value": "Resistance to Might afflictions",
         "tags": [
           "fighter",
-          "resistance_might"
+          "might_affliction",
+          "staggered",
+          "dazed",
+          "stunned"
         ]
       }
     ],
@@ -51735,7 +51738,7 @@
     "description": "Grants a Will bonus.",
     "activation": "passive",
     "notes": [
-      "Granted to Ed\u00e9r on completion of The Lighted Path , if Ed\u00e9r successfully convinces Bearn not to drink the poison."
+      "Granted to Edér on completion of The Lighted Path , if Edér successfully convinces Bearn not to drink the poison."
     ],
     "effects": [
       {
@@ -51751,7 +51754,7 @@
     "origin": {
       "type": "progression",
       "value": {
-        "class": "Ed\u00e9r",
+        "class": "Edér",
         "learn_level": "The Lighted Path completion",
         "level": 1
       }
@@ -52490,8 +52493,8 @@
       }
     ],
     "notes": [
-      "Requirement \u2264 4m from conscious companion",
-      "Automatically applied to a Stalker and their animal companion when they \u2264 4 meters apart."
+      "Requirement ≤ 4m from conscious companion",
+      "Automatically applied to a Stalker and their animal companion when they ≤ 4 meters apart."
     ],
     "origin": {
       "type": "progression",
@@ -52710,7 +52713,7 @@
         "targets": [
           "self"
         ],
-        "condition": "on \u2264 50% Health",
+        "condition": "on ≤ 50% Health",
         "value": "Grants a random Mind Inspiration: Smart, Insightful, or Steadfast",
         "duration": 30.0,
         "tags": [
@@ -53047,7 +53050,7 @@
         "targets": [
           "self"
         ],
-        "condition": "While Bloodied (\u2264 50% Health)",
+        "condition": "While Bloodied (≤ 50% Health)",
         "value": "+2 Armor Rating",
         "tags": [
           "mod_armour"
@@ -53278,7 +53281,7 @@
         "targets": [
           "self"
         ],
-        "condition": "while \u2264 25% Health",
+        "condition": "while ≤ 25% Health",
         "value": "+5 Health Restored per 3.0 sec",
         "duration": 12.0,
         "tags": [
@@ -53289,7 +53292,7 @@
         "targets": [
           "self"
         ],
-        "condition": "while \u2264 25% Health",
+        "condition": "while ≤ 25% Health",
         "value": "-25% Damage taken",
         "duration": 12.0,
         "tags": []
@@ -53502,7 +53505,7 @@
         "targets": [
           "self"
         ],
-        "condition": "against \u2264 25% health targets",
+        "condition": "against ≤ 25% health targets",
         "value": "+20% Damage",
         "tags": [
           "special"
@@ -53569,7 +53572,7 @@
       "value": "Pukestabber"
     },
     "notes": [
-      "Alcoholic drinks include the following: Ale, Arrack, Daib\u014d o Osa [RRP], Ekkev\u00edt [BW], Fine Aedyran Mead, Forgetful Night, Grog, Lager, Meppu [RRP], Midnight Mead, Rice Wine, Rum, Rymsj\u00f3dda Lager [BW], Saucco [RRP], Vrer Chiora [RRP], Wael's Wind [RRP], White Ynefer [RRP]"
+      "Alcoholic drinks include the following: Ale, Arrack, Daibō o Osa [RRP], Ekkevít [BW], Fine Aedyran Mead, Forgetful Night, Grog, Lager, Meppu [RRP], Midnight Mead, Rice Wine, Rum, Rymsjódda Lager [BW], Saucco [RRP], Vrer Chiora [RRP], Wael's Wind [RRP], White Ynefer [RRP]"
     ]
   },
   {
@@ -55478,7 +55481,7 @@
         "targets": [
           "self"
         ],
-        "condition": "Requirement \u2264 50% Health",
+        "condition": "Requirement ≤ 50% Health",
         "value": "Tenacious , Swift , Intuitive",
         "tags": [
           "tenacious",
@@ -56127,7 +56130,7 @@
     "activation": "passive",
     "area_of_effect": "5m",
     "notes": [
-      "Only applies to companions ( Aloth , Ed\u00e9r , Maia Rua , Pallegina , Serafen , Tek\u0113hu and Xoti ), not sidekicks or hired adventurers."
+      "Only applies to companions ( Aloth , Edér , Maia Rua , Pallegina , Serafen , Tekēhu and Xoti ), not sidekicks or hired adventurers."
     ],
     "effects": [
       {
@@ -56268,7 +56271,7 @@
         "targets": [
           "self"
         ],
-        "condition": "while \u2264 25% Health",
+        "condition": "while ≤ 25% Health",
         "value": "+5 Health Restored per 3.0 sec",
         "duration": 18.0,
         "tags": [
@@ -56350,7 +56353,7 @@
         "targets": [
           "self"
         ],
-        "condition": "while \u2264 50% Health",
+        "condition": "while ≤ 50% Health",
         "value": "+15% Action Speed",
         "tags": [
           "mod_action_speed"
@@ -56445,7 +56448,7 @@
         "targets": [
           "self"
         ],
-        "condition": "\u2264 50% Health",
+        "condition": "≤ 50% Health",
         "value": "+7 Accuracy",
         "tags": [
           "mod_accuracy"
@@ -56455,7 +56458,7 @@
         "targets": [
           "self"
         ],
-        "condition": "\u2264 50% Health",
+        "condition": "≤ 50% Health",
         "value": "+15% Damage",
         "tags": []
       }
@@ -56755,7 +56758,7 @@
         "targets": [
           "self"
         ],
-        "condition": "on \u2264 50% Health",
+        "condition": "on ≤ 50% Health",
         "value": "Grants one of: Arcane Veil , Mirrored Image , Wizard's Double , Llengrath's Displaced Image",
         "tags": [
           "illusion",
@@ -56993,9 +56996,9 @@
     }
   },
   {
-    "name": "Frerm\u00e0s mes Canc Suolias (passive)",
+    "name": "Frermàs mes Canc Suolias (passive)",
     "url": "https://pillarsofeternity.fandom.com/wiki/Frerm%C3%A0s_mes_Canc_Suolias_(passive)",
-    "description": "The Frerm\u00e0s mes Canc Suolias, or the Brotherhood of the Five Suns, is a paladin order of the Vailian Republics. The \"Five Suns\" refer to the five Vailian ducs bels, or \"great dukes\". The Brotherhood is loyal to the collective will of the ducal congress, rather than to any particular duc or ducess, and members are forbidden from active intervention in the congress' debates.",
+    "description": "The Frermàs mes Canc Suolias, or the Brotherhood of the Five Suns, is a paladin order of the Vailian Republics. The \"Five Suns\" refer to the five Vailian ducs bels, or \"great dukes\". The Brotherhood is loyal to the collective will of the ducal congress, rather than to any particular duc or ducess, and members are forbidden from active intervention in the congress' debates.",
     "activation": "passive",
     "effects": [
       {
@@ -59645,7 +59648,7 @@
     "description": "Grants a bonus to Resolve.",
     "activation": "passive",
     "notes": [
-      "Granted to Ed\u00e9r on completion of The Lighted Path , if Bearn drinks the poison and is saved, or if he drinks the poison and dies."
+      "Granted to Edér on completion of The Lighted Path , if Bearn drinks the poison and is saved, or if he drinks the poison and dies."
     ],
     "effects": [
       {
@@ -59661,7 +59664,7 @@
     "origin": {
       "type": "progression",
       "value": {
-        "class": "Ed\u00e9r",
+        "class": "Edér",
         "learn_level": 1,
         "level": 1
       }
@@ -60935,7 +60938,7 @@
         "targets": [
           "allied_aoe"
         ],
-        "condition": "when \u2264 50% Health",
+        "condition": "when ≤ 50% Health",
         "value": "Steadfast",
         "duration": 12.0,
         "tags": [
@@ -61670,7 +61673,7 @@
         "targets": [
           "self"
         ],
-        "condition": "with Empowered attacks against \u2264 50% health targets",
+        "condition": "with Empowered attacks against ≤ 50% health targets",
         "value": "100% of Hits converted to Crits",
         "tags": [
           "hit_to_crit",
@@ -61681,7 +61684,7 @@
         "targets": [
           "self"
         ],
-        "condition": "with Empowered attacks against \u2264 50% health targets",
+        "condition": "with Empowered attacks against ≤ 50% health targets",
         "value": "+100% Crit damage",
         "tags": [
           "rogue",
@@ -62943,7 +62946,7 @@
         "targets": [
           "foe_aoe"
         ],
-        "condition": "When health is \u2264 50%, per 6.0 sec",
+        "condition": "When health is ≤ 50%, per 6.0 sec",
         "value": "Sickened",
         "duration": 6.0,
         "tags": [
@@ -63304,7 +63307,7 @@
         "targets": [
           "attackers"
         ],
-        "condition": "while \u2264 25% Health",
+        "condition": "while ≤ 25% Health",
         "value": "Deals 4-8 Burn damage",
         "tags": [
           "burn",
@@ -63315,7 +63318,7 @@
         "targets": [
           "self"
         ],
-        "condition": "while \u2264 25% Health",
+        "condition": "while ≤ 25% Health",
         "value": "+1 Armor Rating",
         "tags": [
           "mod_armour"
@@ -63386,14 +63389,14 @@
     "description": "If the paladin is downed with enough Zeal available to pay Providence's cost, the Zeal is consumed and the paladin is revived a few seconds later.",
     "activation": "passive",
     "notes": [
-      "Triggered automatically if the Paladin is downed with \u2265 3 Zeal available."
+      "Triggered automatically if the Paladin is downed with ≥ 3 Zeal available."
     ],
     "effects": [
       {
         "targets": [
           "self"
         ],
-        "condition": "If the Paladin is downed with \u2265 3 Zeal available",
+        "condition": "If the Paladin is downed with ≥ 3 Zeal available",
         "value": "Revive with 150 Health",
         "tags": [
           "restore_health",
@@ -63893,7 +63896,7 @@
         "targets": [
           "self"
         ],
-        "condition": "While Near Death (\u2264 25% Health)",
+        "condition": "While Near Death (≤ 25% Health)",
         "value": "Paralyzed",
         "duration": 6.0,
         "tags": [
@@ -63905,7 +63908,7 @@
         "targets": [
           "self"
         ],
-        "condition": "While Near Death (\u2264 25% Health)",
+        "condition": "While Near Death (≤ 25% Health)",
         "value": "+10 Health Restored per 1.0 sec",
         "duration": 6.0,
         "tags": [
@@ -63916,7 +63919,7 @@
         "targets": [
           "self"
         ],
-        "condition": "While Near Death (\u2264 25% Health)",
+        "condition": "While Near Death (≤ 25% Health)",
         "value": "-85% Damage taken",
         "duration": 6.0,
         "tags": [
@@ -64848,7 +64851,7 @@
         "targets": [
           "foe_aoe"
         ],
-        "condition": "While \u2264 50% Health",
+        "condition": "While ≤ 50% Health",
         "value": "-10 Will",
         "tags": [
           "mod_will",
@@ -64881,7 +64884,7 @@
         "targets": [
           "self"
         ],
-        "condition": "While Bloodied (\u2264 50% Health)",
+        "condition": "While Bloodied (≤ 50% Health)",
         "value": "+2 Armor Rating against weapons",
         "tags": [
           "mod_armour"
@@ -65152,7 +65155,7 @@
         "targets": [
           "self"
         ],
-        "condition": "with Ranged weapons against \u2264 4m distance targets",
+        "condition": "with Ranged weapons against ≤ 4m distance targets",
         "value": "+1 Penetration",
         "tags": [
           "mod_penetration",
@@ -65609,7 +65612,7 @@
         "targets": [
           "foe_aoe"
         ],
-        "condition": "While Bloodied (\u2264 50% Health)",
+        "condition": "While Bloodied (≤ 50% Health)",
         "value": "-75% Healing received",
         "tags": [
           "mod_healing_received"
@@ -65667,7 +65670,7 @@
         "targets": [
           "foe_aoe"
         ],
-        "condition": "While Bloodied (\u2264 50% Health)",
+        "condition": "While Bloodied (≤ 50% Health)",
         "value": "-50% Healing received",
         "tags": [
           "mod_healing_received"
@@ -69831,7 +69834,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Vengeful_Cold",
     "description": "Grants a chance to launch a small blast of cold around the caster upon receiving a Critical hit, dealing Freeze damage to nearby enemies, so long as there are no nearby allies. Gain Concentration intermittently when far from any allies.",
     "activation": "passive",
-    "area_of_effect": "Length: 1.5 90\u00b0 Cone",
+    "area_of_effect": "Length: 1.5 90° Cone",
     "notes": [
       "Combat only",
       "Cast time: 3.0 sec (Average)",
@@ -71226,7 +71229,7 @@
     "url": "https://pillarsofeternity.fandom.com/wiki/Winter%27s_Chill",
     "description": "Winter's Chill is an ability in Pillars of Eternity II: Deadfire .",
     "activation": "passive",
-    "area_of_effect": "Length: 3 145\u00b0 Cone",
+    "area_of_effect": "Length: 3 145° Cone",
     "notes": [
       "Combat only",
       "Noise Quiet (Use + Impact)"
@@ -71608,7 +71611,7 @@
         "targets": [
           "self"
         ],
-        "condition": "while \u2265 3 allies within 2m",
+        "condition": "while ≥ 3 allies within 2m",
         "value": "+10 Accuracy with Melee attacks",
         "tags": [
           "mod_accuracy"
@@ -71618,7 +71621,7 @@
         "targets": [
           "self"
         ],
-        "condition": "while \u2265 3 allies within 2m and on scoring Hit (includes Graze and Crit) against enemy with no allies within 2m",
+        "condition": "while ≥ 3 allies within 2m and on scoring Hit (includes Graze and Crit) against enemy with no allies within 2m",
         "value": "25% chance to Interrupt",
         "tags": [
           "interrupt"
@@ -72095,7 +72098,7 @@
         "targets": [
           "self"
         ],
-        "condition": "while \u2264 50% Health",
+        "condition": "while ≤ 50% Health",
         "value": "+5 Deflection",
         "tags": [
           "mod_deflection",
@@ -72624,7 +72627,7 @@
         "targets": [
           "foe_target"
         ],
-        "condition": "if target is Near Death (\u2264 25% Health)",
+        "condition": "if target is Near Death (≤ 25% Health)",
         "value": "75% Chance to apply Distracted",
         "duration": 8.0,
         "tags": [
@@ -74792,35 +74795,99 @@
     }
   },
   {
-    "name": "Imbue: Death",
-    "url": "https://pillarsofeternity.fandom.com/wiki/Imbue:_Death",
-    "description": "Briefly store a spell in the ammunition of your ranged weapon, then perform a Primary Attack, releasing the magic on impact. (Imbue: Death) - Stores the spell Death Ring.",
-    "activation": "active",
+    "name": "Body Control (Deadfire)",
+    "url": "https://pillarsofeternity.fandom.com/wiki/Body_Control_(Deadfire)",
+    "description": "The fighter becomes resistant to Might Afflictions, (Staggered, Dazed, and Stunned).",
+    "activation": "passive",
+    "area_of_effect": "self",
     "effects": [
       {
         "targets": [
-          "target"
+          "self"
         ],
-        "condition": "On hit",
-        "value": "Primary attack. Apply Death Ring on hit",
+        "value": "Resistance to might afflictions",
         "tags": [
-          "ranger",
-          "transmutation"
+          "mod_accuracy",
+          "fighter"
         ]
       }
     ],
     "origin": {
       "type": "progression",
       "value": {
-        "class": "Ranger",
-        "learn_level": "19 (Single) / 25 (Multi)",
-        "level": 9
+        "class": "Fighter",
+        "learn_level": "7 (single) / 10 (multi)",
+        "level": 4
       }
-    },
-    "keywords": [
-      "Conjuration",
-      "Imbue",
-      "Acid"
-    ]
+    }
+  },
+  {
+    "name": "Bell-Ringer",
+    "url": "https://pillarsofeternity.fandom.com/wiki/Bell-Ringer",
+    "description": "The wielder aims for the target's head, concussing them.",
+    "activation": "active",
+    "effects": [
+      {
+        "targets": [
+          "foe_target"
+        ],
+        "value": "Target: Full Attack If successful: Dazed for 12.0 sec | Accuracy vs. Fortitude",
+        "tags": [
+          "dazed",
+          "targets_fortitude"
+        ]
+      }
+    ],
+    "origin": {
+      "type": "item",
+      "value": "Resounding Call"
+    }
+  },
+  {
+    "name": "Crushing Blow",
+    "url": "https://pillarsofeternity.fandom.com/wiki/Crushing_Blow",
+    "description": "The barbarian deals a massive blow, increasing the likeliness and damage of Critical Hits and applying Carnage in a larger area. (Crushing Blow) - If the barbarian kills the target, their recovery is instantly refreshed.",
+    "activation": "active",
+    "area_of_effect": "self",
+    "notes": ["Crushing Blow grants an additional +20% damage instead of the +50% Crit damage of both the ability it is upgraded from, and the variant, Barbaric Smash. This is likely a bug, particularly considering the ability description is not modified."],
+    "effects": [
+      {
+        "targets": [
+          "self"
+        ],
+        "value": "Recover immediately",
+        "tags": [
+          "barbarian"
+        ]
+      },
+      {
+        "targets": [
+          "target"
+        ],
+        "value": "Full attack",
+        "tags": [
+          "barbarian"
+        ]
+      },
+      {
+        "targets": [
+          "self"
+        ],
+        "value": "+20% Damage, +50% Area of Effect with Carnage attacks, 30% of Hits converted to Crits, +20% Damage",
+        "tags": [
+          "barbarian",
+          "hit_to_crit",
+          "mod_damage"
+        ]
+      }
+    ],
+    "origin": {
+      "type": "progression",
+      "value": {
+        "class": "Barbarian",
+        "learn_level": "9 (Single) / 13 (Multi)",
+        "level": 5
+      }
+    }
   }
 ]
