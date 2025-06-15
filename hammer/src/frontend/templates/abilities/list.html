@@ -18,9 +18,15 @@
             );
         },
         updateFilters() {
-            htmx.trigger("#abilities-list", "filter-change", {
-                tags: this.selectedTags.join(","),
-                filter_logic: this.filterLogic
+            const params = new URLSearchParams();
+            if (this.selectedTags.length > 0) {
+                params.set("tags", this.selectedTags.join(","));
+            }
+            params.set("filter_logic", this.filterLogic);
+
+            htmx.ajax("GET", "/api/filter-abilities?" + params.toString(), {
+                target: "#abilities-list",
+                indicator: ".htmx-indicator"
             });
         }
     }'>
@@ -100,9 +106,6 @@
     <div
         id="abilities-list"
         class="bg-white shadow rounded-lg divide-y divide-gray-200"
-        hx-get="/api/filter-abilities"
-        hx-trigger="filter-change from:body"
-        hx-indicator=".htmx-indicator"
     >
         <!-- Initial loading state -->
         <div class="p-4 text-center text-gray-500">
