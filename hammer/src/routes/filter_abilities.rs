@@ -3,7 +3,7 @@ use std::sync::Arc;
 use axum::{Json, extract::Query};
 use serde::{Deserialize, Serialize};
 
-use crate::backend::ability::Ability;
+use crate::ability::Ability;
 
 #[derive(Debug, Deserialize)]
 pub(super) struct FilterParams {

@@ -1,9 +1,13 @@
-pub(crate) mod backend;
+pub(crate) mod ability;
 pub(crate) mod config;
-pub(crate) mod frontend;
+pub(crate) mod db;
+pub(crate) mod error;
+pub(crate) mod index_abilities;
+pub(crate) mod load_abilities;
+pub(crate) mod read_abilities;
+pub(crate) mod routes;
 
-use crate::backend::routes::get_backend_routes;
-use crate::frontend::init_templates;
+use crate::routes::get_backend_routes;
 use axum::{Router, http::StatusCode, routing::get};
 use tower::ServiceBuilder;
 use tower_http::trace::TraceLayer;
@@ -19,13 +23,9 @@ async fn main() {
         .with(tracing_subscriber::fmt::layer())
         .init();
 
-    // Initialize templates
-    let templates = init_templates().expect("Failed to initialize templates");
-
     let app = Router::<()>::new()
         .route("/health", get(|| async { StatusCode::OK }))
         .nest("/api", get_backend_routes())
-        .merge(frontend::routes::get_frontend_routes(templates))
         .layer(ServiceBuilder::new().layer(TraceLayer::new_for_http()));
 
     // Run it

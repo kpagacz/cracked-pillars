@@ -1,4 +1,4 @@
-use crate::backend::ability::Ability;
+use crate::ability::Ability;
 use std::collections::HashMap;
 
 pub(crate) fn index_abilities(abilities: &[Ability]) -> HashMap<String, Vec<usize>> {

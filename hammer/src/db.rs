@@ -1,4 +1,4 @@
-use crate::backend::error::Error;
+use crate::error::Error;
 use std::path::{Path, PathBuf};
 
 use rusqlite::{CachedStatement, Connection};

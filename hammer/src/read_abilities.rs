@@ -1,6 +1,6 @@
-use crate::backend::ability::Ability;
-use crate::backend::error::Error;
+use crate::ability::Ability;
 use crate::config::CONFIG;
+use crate::error::Error;
 use std::path::Path;
 
 pub(crate) fn read_abilities() -> Result<Vec<Ability>, Error> {
