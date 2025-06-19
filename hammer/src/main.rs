@@ -1,9 +1,11 @@
+pub(crate) mod abbreviated_ability;
 pub(crate) mod ability;
 pub(crate) mod config;
 pub(crate) mod db;
 pub(crate) mod error;
 pub(crate) mod index_abilities;
 pub(crate) mod load_abilities;
+pub(crate) mod pagination;
 pub(crate) mod read_abilities;
 pub(crate) mod routes;
 
@@ -18,7 +20,7 @@ async fn main() {
     // Initialize tracing
     tracing_subscriber::registry()
         .with(tracing_subscriber::EnvFilter::new(
-            std::env::var("RUST_LOG").unwrap_or_else(|_| "tower_http=trace".into()),
+            std::env::var("RUST_LOG").unwrap_or_else(|_| "hammer=trace,tower_http=trace".into()),
         ))
         .with(tracing_subscriber::fmt::layer())
         .init();
@@ -29,7 +31,7 @@ async fn main() {
         .layer(ServiceBuilder::new().layer(TraceLayer::new_for_http()));
 
     // Run it
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:8000").await.unwrap();
     println!("TRACE: Listening on {}", listener.local_addr().unwrap());
     axum::serve(listener, app).await.unwrap();
 }
