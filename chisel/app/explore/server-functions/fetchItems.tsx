@@ -9,6 +9,7 @@ export interface Item {
 export async function fetchItemsByTags(tags: string[]): Promise<Item[]> {
   const searchParams = new URLSearchParams();
   tags.forEach((tag) => searchParams.append("tags", tag));
+  searchParams.append("per_page", "1000");
   let abilitiesApi = `http://${process.env.NEXT_PUBLIC_API_URL}/abilities?${searchParams}`;
   try {
     const response = await fetch(abilitiesApi);

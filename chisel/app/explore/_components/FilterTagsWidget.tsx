@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 
-export default function ({
+function FilterTagsWidget({
   onFilterFormSubmitted,
   tagsPromise,
 }: {
@@ -30,42 +30,90 @@ export default function ({
     setSearchedTags([...searchedTags, tag]);
     setRecommendedTags(recommendedTags.filter((t) => t !== tag));
   };
-  const clearTags = (_: MouseEvent<HTMLButtonElement>) => {
+  const clearTags = () => {
     setSearchedTags([]);
   };
   const onFormSubmitted: EventHandler<MouseEvent<HTMLFormElement>> = (e) => {
     e.preventDefault();
     onFilterFormSubmitted(searchedTags);
   };
+
   return (
-    <>
-      <form onSubmit={onFormSubmitted}>
-        <input
-          name="tagSearch"
-          type="text"
-          id="tagSearch"
-          placeholder="Start typing a tag..."
-          autoFocus
-          onChange={onSearchedTagChanged}
-          value={searchText}
-          onBlur={(e) => {
-            e.target.focus();
-          }}
-        ></input>
-        <Suspense fallback={<span>Loading available tags...</span>}>
-          <TagList tags={recommendedTags} onTagAdded={onTagAdded} />
-        </Suspense>
+    <div className="space-y-6">
+      <form onSubmit={onFormSubmitted} className="space-y-4">
+        {/* Search Input */}
         <div>
-          {searchedTags.map((tag) => {
-            return <span key={tag}>{tag}</span>;
-          })}
+          <label htmlFor="tagSearch" className="block text-sm font-medium text-text mb-2">
+            Search Tags
+          </label>
+          <input
+            name="tagSearch"
+            type="text"
+            id="tagSearch"
+            placeholder="Start typing a tag..."
+            autoFocus
+            onChange={onSearchedTagChanged}
+            value={searchText}
+            onBlur={(e) => {
+              e.target.focus();
+            }}
+            className="w-full px-4 py-3 bg-secondary/30 border border-border/50 rounded-lg text-text placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-highlight focus:border-transparent transition-all duration-200"
+          />
         </div>
-        <button onClick={clearTags}>Clear tags</button>
-        <button type="submit">Filter</button>
+
+        {/* Recommended Tags */}
+        <div>
+          <h3 className="text-sm font-medium text-text mb-3">Available Tags</h3>
+          <Suspense fallback={
+            <div className="text-text-muted text-sm animate-pulse-slow">
+              Loading available tags...
+            </div>
+          }>
+            <TagList tags={recommendedTags} onTagAdded={onTagAdded} />
+          </Suspense>
+        </div>
+
+        {/* Selected Tags */}
+        {searchedTags.length > 0 && (
+          <div>
+            <h3 className="text-sm font-medium text-text mb-3">Selected Tags</h3>
+            <div className="flex flex-wrap gap-2 mb-4">
+              {searchedTags.map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-highlight/20 text-highlight border border-highlight/30"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Action Buttons */}
+        <div className="flex gap-3 pt-4">
+          <button
+            type="button"
+            onClick={clearTags}
+            className="flex-1 px-4 py-2 bg-secondary/50 hover:bg-secondary/70 text-text border border-border/50 rounded-lg transition-all duration-200 hover:border-border"
+          >
+            Clear All
+          </button>
+          <button
+            type="submit"
+            className="flex-1 px-4 py-2 bg-highlight hover:bg-highlight/90 text-white font-medium rounded-lg transition-all duration-200 transform hover:scale-105"
+          >
+            Apply Filters
+          </button>
+        </div>
       </form>
-    </>
+    </div>
   );
 }
+
+FilterTagsWidget.displayName = "FilterTagsWidget";
+
+export default FilterTagsWidget;
 
 function Tag({
   tag,
@@ -75,17 +123,16 @@ function Tag({
   onTagAdded: (_: string) => void;
 }) {
   return (
-    <>
-      {tag}
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          onTagAdded(tag);
-        }}
-      >
-        +
-      </button>
-    </>
+    <button
+      onClick={(e) => {
+        e.preventDefault();
+        onTagAdded(tag);
+      }}
+      className="inline-flex items-center gap-2 px-3 py-2 bg-secondary/30 hover:bg-secondary/50 text-text border border-border/30 rounded-lg transition-all duration-200 hover:border-highlight/50 group"
+    >
+      <span className="text-sm">{tag}</span>
+      <span className="text-highlight group-hover:scale-110 transition-transform duration-200">+</span>
+    </button>
   );
 }
 
@@ -96,11 +143,24 @@ function TagList({
   tags: string[];
   onTagAdded: (_: string) => void;
 }) {
+  if (tags.length === 0) {
+    return (
+      <div className="text-text-muted text-sm italic">
+        No tags available
+      </div>
+    );
+  }
+
   return (
-    <>
-      {tags.map((tag) => {
+    <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto">
+      {tags.slice(0, 20).map((tag) => {
         return <Tag key={tag} tag={tag} onTagAdded={onTagAdded} />;
       })}
-    </>
+      {tags.length > 20 && (
+        <div className="text-text-muted text-xs italic">
+          +{tags.length - 20} more tags
+        </div>
+      )}
+    </div>
   );
 }
