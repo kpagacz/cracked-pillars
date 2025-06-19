@@ -15,7 +15,10 @@ pub(crate) fn get_connection() -> Result<Connection, Error> {
 
 pub(crate) fn synchronize_db(connection: &Connection) -> Result<(), Error> {
     create_migration_table(connection)?;
-    println!("TRACE: Created the migration table if it did not exist");
+    tracing::event!(
+        tracing::Level::TRACE,
+        "Created the migration table if it did not exist"
+    );
     execute_missing_migrations(connection)?;
     Ok(())
 }
@@ -35,9 +38,9 @@ fn create_migration_table(connection: &Connection) -> Result<(), Error> {
 
 fn execute_missing_migrations(connection: &Connection) -> Result<(), Error> {
     let files = list_migration_files()?;
-    println!("TRACE: Migration files found: {files:?}");
+    tracing::trace!("Migration files found: {files:?}");
     let done_migrations = list_done_migrations(connection)?;
-    println!("TRACE: Done migrations: {done_migrations:?}");
+    tracing::trace!("Done migrations: {done_migrations:?}");
     let mut stmt = connection
         .prepare_cached(&format!(
             "INSERT INTO {} ({}) VALUES (?1)",
@@ -88,7 +91,7 @@ fn list_done_migrations(connection: &Connection) -> Result<Vec<PathBuf>, Error> 
 }
 
 fn execute_migration(file: &Path, connection: &Connection) -> Result<(), Error> {
-    println!("TRACE: Executing the migration from file: {file:?}");
+    tracing::trace!("Executing the migration from file: {file:?}");
     let commands =
         std::fs::read_to_string(file).map_err(|_| "Failed to read the migration file")?;
     connection
