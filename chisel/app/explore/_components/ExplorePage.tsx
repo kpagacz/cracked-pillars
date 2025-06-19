@@ -1,5 +1,6 @@
 "use client";
-import FilterTagsWidget from "./FilterTagsWidget";
+
+import { FilterTagsWidget } from "./FilterTagsWidget";
 import ItemsLoadingFallback from "../_components/ItemsLoadingFallback";
 import ResultsOverview from "./ResultsOverview";
 import { Item } from "../server-functions/fetchItems";
@@ -41,7 +42,7 @@ export default function ExplorePage({
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Filter Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-secondary/50 backdrop-blur-sm border border-border/30 rounded-lg p-6 sticky top-24">
+            <div className="bg-secondary/70 backdrop-blur-sm border border-border/50 rounded-lg p-6 sticky top-24 shadow-sm">
               <h2 className="text-xl font-semibold text-text mb-4">Filters</h2>
               <FilterTagsWidget
                 onFilterFormSubmitted={onFilterFormSubmitted}
@@ -52,7 +53,7 @@ export default function ExplorePage({
 
           {/* Results Section */}
           <div className="lg:col-span-3">
-            <div className="bg-secondary/30 backdrop-blur-sm border border-border/30 rounded-lg p-6">
+            <div className="bg-secondary/50 backdrop-blur-sm border border-border/50 rounded-lg p-6 shadow-sm">
               <Suspense fallback={<ItemsLoadingFallback />}>
                 <ResultsOverview items={items} />
               </Suspense>

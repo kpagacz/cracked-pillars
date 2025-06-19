@@ -2,7 +2,7 @@ import { Item } from "../server-functions/fetchItems";
 
 export default function ItemOverview({ item }: { item: Item }) {
   return (
-    <div className="bg-secondary/30 hover:bg-secondary/50 border border-border/30 hover:border-highlight/30 rounded-lg p-6 transition-all duration-200 group">
+    <div className="bg-primary/30 hover:bg-primary/50 border border-border/50 hover:border-highlight/50 rounded-lg p-6 transition-all duration-200 group shadow-sm">
       <div className="flex items-start justify-between">
         <div className="flex-1">
           <h3 className="text-lg font-semibold text-text mb-2 group-hover:text-highlight transition-colors duration-200">
@@ -28,7 +28,7 @@ export default function ItemOverview({ item }: { item: Item }) {
             href={item.wiki_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-4 px-4 py-2 bg-highlight/20 hover:bg-highlight/30 text-highlight border border-highlight/30 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105 flex items-center gap-2"
+            className="ml-4 px-4 py-2 bg-highlight/20 hover:bg-highlight/30 text-highlight border border-highlight/30 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105 flex items-center gap-2 shadow-sm"
           >
             <span>Wiki</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

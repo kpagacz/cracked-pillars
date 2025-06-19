@@ -12,7 +12,7 @@ export default function NotFound() {
         <div className="space-y-4">
           <Link
             href="/"
-            className="inline-block bg-highlight hover:bg-highlight/90 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105"
+            className="inline-block bg-highlight hover:bg-highlight/90 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-sm"
           >
             Go Home
           </Link>

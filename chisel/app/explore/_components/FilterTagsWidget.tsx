@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 
-function FilterTagsWidget({
+export function FilterTagsWidget({
   onFilterFormSubmitted,
   tagsPromise,
 }: {
@@ -15,7 +15,7 @@ function FilterTagsWidget({
   tagsPromise: Promise<string[]>;
 }) {
   const tags = use(tagsPromise);
-  const [searchedTags, setSearchedTags] = useState<string[]>([""]);
+  const [searchedTags, setSearchedTags] = useState<string[]>([]);
   const [searchText, setSearchText] = useState<string>("");
   const [recommendedTags, setRecommendedTags] = useState<string[]>(tags);
   const onSearchedTagChanged = (event: ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +43,10 @@ function FilterTagsWidget({
       <form onSubmit={onFormSubmitted} className="space-y-4">
         {/* Search Input */}
         <div>
-          <label htmlFor="tagSearch" className="block text-sm font-medium text-text mb-2">
+          <label
+            htmlFor="tagSearch"
+            className="block text-sm font-medium text-text mb-2"
+          >
             Search Tags
           </label>
           <input
@@ -57,18 +60,20 @@ function FilterTagsWidget({
             onBlur={(e) => {
               e.target.focus();
             }}
-            className="w-full px-4 py-3 bg-secondary/30 border border-border/50 rounded-lg text-text placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-highlight focus:border-transparent transition-all duration-200"
+            className="w-full px-4 py-3 bg-primary/50 border border-border/50 rounded-lg text-text placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-highlight focus:border-transparent transition-all duration-200"
           />
         </div>
 
         {/* Recommended Tags */}
         <div>
           <h3 className="text-sm font-medium text-text mb-3">Available Tags</h3>
-          <Suspense fallback={
-            <div className="text-text-muted text-sm animate-pulse-slow">
-              Loading available tags...
-            </div>
-          }>
+          <Suspense
+            fallback={
+              <div className="text-text-muted text-sm animate-pulse-slow">
+                Loading available tags...
+              </div>
+            }
+          >
             <TagList tags={recommendedTags} onTagAdded={onTagAdded} />
           </Suspense>
         </div>
@@ -76,7 +81,9 @@ function FilterTagsWidget({
         {/* Selected Tags */}
         {searchedTags.length > 0 && (
           <div>
-            <h3 className="text-sm font-medium text-text mb-3">Selected Tags</h3>
+            <h3 className="text-sm font-medium text-text mb-3">
+              Selected Tags
+            </h3>
             <div className="flex flex-wrap gap-2 mb-4">
               {searchedTags.map((tag) => (
                 <span
@@ -95,13 +102,13 @@ function FilterTagsWidget({
           <button
             type="button"
             onClick={clearTags}
-            className="flex-1 px-4 py-2 bg-secondary/50 hover:bg-secondary/70 text-text border border-border/50 rounded-lg transition-all duration-200 hover:border-border"
+            className="flex-1 px-4 py-2 bg-primary/50 hover:bg-primary/70 text-text border border-border/50 rounded-lg transition-all duration-200 hover:border-highlight/50 shadow-sm"
           >
             Clear All
           </button>
           <button
             type="submit"
-            className="flex-1 px-4 py-2 bg-highlight hover:bg-highlight/90 text-white font-medium rounded-lg transition-all duration-200 transform hover:scale-105"
+            className="flex-1 px-4 py-2 bg-highlight hover:bg-highlight/90 text-white font-medium rounded-lg transition-all duration-200 transform hover:scale-105 shadow-sm"
           >
             Apply Filters
           </button>
@@ -110,10 +117,6 @@ function FilterTagsWidget({
     </div>
   );
 }
-
-FilterTagsWidget.displayName = "FilterTagsWidget";
-
-export default FilterTagsWidget;
 
 function Tag({
   tag,
@@ -128,10 +131,12 @@ function Tag({
         e.preventDefault();
         onTagAdded(tag);
       }}
-      className="inline-flex items-center gap-2 px-3 py-2 bg-secondary/30 hover:bg-secondary/50 text-text border border-border/30 rounded-lg transition-all duration-200 hover:border-highlight/50 group"
+      className="inline-flex items-center gap-2 px-3 py-2 bg-primary/30 hover:bg-primary/50 text-text border border-border/30 rounded-lg transition-all duration-200 hover:border-highlight/50 group shadow-sm"
     >
       <span className="text-sm">{tag}</span>
-      <span className="text-highlight group-hover:scale-110 transition-transform duration-200">+</span>
+      <span className="text-highlight group-hover:scale-110 transition-transform duration-200">
+        +
+      </span>
     </button>
   );
 }
@@ -145,9 +150,7 @@ function TagList({
 }) {
   if (tags.length === 0) {
     return (
-      <div className="text-text-muted text-sm italic">
-        No tags available
-      </div>
+      <div className="text-text-muted text-sm italic">No tags available</div>
     );
   }
 
