@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Item Template",
+  "description": "Schema for items with name, wiki URL, and tags",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the item",
+      "minLength": 1
+    },
+    "wiki_url": {
+      "type": "string",
+      "description": "URL to the item's wiki page",
+      "format": "uri"
+    },
+    "effects_description": {
+      "type": "string",
+      "description": "Description of the effects",
+      "minLength": 1
+    },
+    "tags": {
+      "type": "array",
+      "description": "Array of tags associated with the item",
+      "items": {
+        "type": "string",
+        "enum": [
+          "barbarian", "chanter", "cipher", "druid", "fighter", "monk", "paladin", "priest", "ranger", "rogue", "wizard",
+          "evocation", "veil_piercing", "interrupt",
+          "slashing", "piercing", "crashing", "shock", "burn", "freeze", "corrode", "raw",
+          "illusion", "conjuration", "enchanting", "transmutation",
+          "constitution_affliction", "dexterity_affliction", "might_affliction", "intellect_affliction", "perception_affliction", "resolve_affliction",
+          "constitution_inspiration", "dexterity_inspiration", "might_inspiration", "intellect_inspiration", "perception_inspiration", "resolve_inspiration",
+          "sickened", "weakened", "enfeebled", "fit", "hardy", "robust",
+          "hobbled", "immobilized", "paralyzed", "petrified",
+          "quick", "nimble", "swift",
+          "staggered", "dazed", "stunned",
+          "strong", "tenacious", "energized",
+          "confused", "charmed", "dominated",
+          "smart", "acute", "brilliant",
+          "distracted", "disoriented", "blinded",
+          "insightful", "aware", "intuitive",
+          "shaken", "frightened", "terrified",
+          "steadfast", "resolute", "courageous",
+          "targets_deflection", "targets_reflex", "targets_fortitude", "targets_will",
+          "engagement_slots",
+          "summon_weapon", "summon_creature",
+          "mod_accuracy", "mod_deflection", "mod_reflex", "mod_fortitude", "mod_will",
+          "mod_move_speed", "prone", "mod_armour", "concentration",
+          "slashing_armour", "piercing_armour", "crashing_armour",
+          "shock_armour", "burn_armour", "freeze_armour", "corrode_armour",
+          "graze_to_hit", "hit_to_crit", "hit_to_graze", "crit_to_hit",
+          "mod_stride", "mod_action_speed",
+          "restore_health", "mod_restore_health",
+          "duplicate", "mod_spell_reflect", "spell_steal", "transform",
+          "mod_effects_duration", "mod_healing_received",
+          "untargetable",
+          "might_immunity", "constitution_immunity", "dexterity_immunity",
+          "intellect_immunity", "resolve_immunity", "perception_immunity",
+          "mod_power_level", "mod_weapon_sets",
+          "mod_recovery_time", "mod_reload_time",
+          "mod_penetration", "special",
+          "mod_ability_range", "mod_max_health", "mod_empower_points",
+          "spellcasting_disabled",
+          "mod_might", "mod_constitution", "mod_dexterity", "mod_intellect", "mod_perception", "mod_resolve",
+          "invisible",
+          "resistance_might", "resistance_constitution", "resistance_dexterity", "resistance_intellect", "resistance_perception", "resistance_resolve",
+          "mod_damage", "additional_attacks", "on_hit_dot", "pull", "immunity_pull", "immunity_paralyzed", "mod_ranged_accuracy", "counterattack", "lash"
+        ]
+      },
+      "minItems": 0
+    }
+  },
+  "required": ["name", "wiki_url", "tags", "effects_description"],
+  "additionalProperties": false
+}

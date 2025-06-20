@@ -107,9 +107,9 @@
                 "mod_ability_range", "mod_max_health", "mod_empower_points",
                 "spellcasting_disabled",
                 "mod_might", "mod_constitution", "mod_dexterity", "mod_intellect", "mod_perception", "mod_resolve",
-                "invisible", 
+                "invisible",
                 "resistance_might", "resistance_constitution", "resistance_dexterity", "resistance_intellect", "resistance_perception", "resistance_resolve",
-                "mod_damage"
+                "mod_damage", "additional_attacks", "on_hit_dot", "pull", "immunity_pull", "immunity_paralyzed", "mod_ranged_accuracy", "counterattack", "lash"
               ]
             }
           }

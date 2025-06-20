@@ -7,7 +7,7 @@ from pathlib import Path
 
 def validate_json(example_file: str) -> None:
     # Load the schema
-    schema_path = Path(__file__).parent / 'spell-template.jsonschema'
+    schema_path = Path(__file__).parent / 'jsonschemas' /'spell-template.jsonschema'
     with open(schema_path) as f:
         schema = json.load(f)
 

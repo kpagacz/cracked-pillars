@@ -141,3 +141,11 @@
 142: resistance_perception
 143: resistance_resolve
 144: mod_damage
+145: additional_attacks
+146: on_hit_dot
+147: pull
+148: immunity_pull
+149: immunity_paralyzed
+150: mod_ranged_accuracy
+151: counterattack
+152: lash
