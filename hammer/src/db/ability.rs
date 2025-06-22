@@ -52,10 +52,6 @@ pub(crate) fn insert_abbreviated_ability(ability: &AbbreviatedAbility) -> Result
             &ability.wiki_url
         ])
         .map_err(|e| format!("Failed to insert ability {ability:?}: {e:?}"))?;
-    tracing::event!(
-        tracing::Level::TRACE,
-        "Inserted abbreviated ability with id {id}"
-    );
     drop(stmt);
     let mut stmt = tx
         .prepare("INSERT INTO abilities_tags (ability_id, tag_name) VALUES (?1, ?2)")
@@ -190,15 +186,12 @@ pub(crate) fn delete_abbreviated_ability_by_slug(slug: &str) -> Result<(), Strin
 pub(crate) fn update_abbreviated_ability_by_slug(
     slug: &str,
     ability: AbbreviatedAbility,
-) -> Result<(), String> {
-    let mut conn =
-        crate::db::get_connection().map_err(|e| format!("Failed to get DB connection: {e:?}"))?;
-    let tx = conn
-        .transaction()
-        .map_err(|e| format!("Failed to start transaction: {e:?}"))?;
+) -> Result<(), Error> {
+    let mut conn = crate::db::get_connection()?;
+    let tx = conn.transaction()?;
 
     let mut stmt = tx
-        .prepare("UPDATE abilities SET name = ?1, url = ?2, slug = ?3 WHERE slug = ?3")
+        .prepare("UPDATE abilities SET name = ?1, url = ?2, slug = ?3 WHERE slug = ?4")
         .map_err(|e| format!("Failed to prepare the update statement: {e:?}"))?;
     let _ = stmt
         .execute(rusqlite::params![
@@ -208,20 +201,24 @@ pub(crate) fn update_abbreviated_ability_by_slug(
             slug
         ])
         .map_err(|e| format!("Failed to update the ability: {e:?}"))?;
+    drop(stmt);
     // Ensure previous tags are removed
     let mut stmt = tx
-        .prepare("DELETE FROM abilities_tags WHERE id = (SELECT id FROM abilities WHERE slug = ?1)")
+        .prepare("DELETE FROM abilities_tags WHERE ability_id=(SELECT id FROM abilities WHERE slug = ?1)")
         .map_err(|e| format!("Failed to prepare the delete tags statement: {e:?}"))?;
     let _ = stmt
         .execute([slug])
         .map_err(|e| format!("Failed to delete tags: {e:?}"))?;
+    drop(stmt);
     // Add new tags
-    let mut stmt = tx.prepare("INESRT INTO abilities_tags (id, tag_name) VALUES ((SELECT id FROM abilities WHERE slug = ?1), ?2)")
+    let mut stmt = tx.prepare("INSERT INTO abilities_tags (ability_id, tag_name) VALUES ((SELECT id FROM abilities WHERE slug=?1), ?2)")
         .map_err(|e| format!("Failed to prepare the insert tags statement: {e:?}"))?;
     for tag in ability.tags {
         stmt.execute(rusqlite::params![slug, tag])
             .map_err(|e| format!("Failed to insert tag: {e:?}"))?;
     }
 
+    drop(stmt);
+    tx.commit()?;
     Ok(())
 }

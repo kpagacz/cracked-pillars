@@ -48,9 +48,8 @@ fn from_row(row: &rusqlite::Row, conn: &Connection) -> Result<PersistedItem, Err
 }
 
 pub(crate) fn find_by_slug(slug: &str, conn: &Connection) -> Result<Option<PersistedItem>, Error> {
-    let mut stmt = conn.prepare(
-        "SELECT id,name,slug,wiki_url,tags,effects_description FROM items WHERE slug=?1",
-    )?;
+    let mut stmt =
+        conn.prepare("SELECT id,name,slug,wiki_url,effects_description FROM items WHERE slug=?1")?;
     let mut rows = stmt.query(rusqlite::params![slug])?;
     Ok(rows.next()?.and_then(|row| from_row(row, conn).ok()))
 }
@@ -74,29 +73,24 @@ pub(crate) fn delete(slug: &str, conn: &Connection) -> Result<(), Error> {
 pub(crate) fn update(slug: &str, item: &Item, conn: &mut Connection) -> Result<(), Error> {
     let tx = conn.transaction()?;
     let mut stmt = tx.prepare(
-        "UPDATE items set name=?1 slug=?2 wiki_url?3 effects_description=?4 WHERE slug=?5",
+        "UPDATE items set name=?1, slug=?2, wiki_url=?3, effects_description=?4 WHERE slug=?5",
     )?;
-    stmt.query_one(
-        rusqlite::params![
-            item.name,
-            item.slug,
-            item.wiki_url,
-            item.effects_description,
-            slug
-        ],
-        |row| {
-            let item_id: i64 = row.get(0)?;
-            let mut stmt = tx.prepare("DELETE FROM items_tags WHERE item_id=?1")?;
-            stmt.execute(rusqlite::params![item_id])?;
-            let mut stmt =
-                tx.prepare("INSERT INTO items_tags (item_id, tag_name) VALUES (?1, ?2)")?;
-            for tag_name in &item.tags {
-                stmt.insert(rusqlite::params![item_id, tag_name])?;
-            }
-            drop(stmt);
-            Ok(())
-        },
-    )?;
+    let _ = stmt.execute(rusqlite::params![
+        item.name,
+        item.slug,
+        item.wiki_url,
+        item.effects_description,
+        slug
+    ])?;
+    drop(stmt);
+    let mut stmt =
+        tx.prepare("DELETE FROM items_tags WHERE item_id=(SELECT id FROM items WHERE slug=?1)")?;
+    let _ = stmt.execute(rusqlite::params![slug])?;
+    drop(stmt);
+    let mut stmt = tx.prepare("INSERT INTO items_tags (item_id, tag_name) VALUES ((SELECT id FROM items WHERE slug=?1), ?2)")?;
+    for tag_name in &item.tags {
+        stmt.insert(rusqlite::params![slug, tag_name])?;
+    }
     drop(stmt);
     tx.commit()?;
     Ok(())

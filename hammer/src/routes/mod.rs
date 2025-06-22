@@ -20,6 +20,7 @@ pub(crate) fn get_backend_routes(
         .with_state(abilities_index)
         .with_state(items_index)
         .route("/tags", get(tags::get))
+        .route("/abilities", get(abilities::find_all))
         .route(
             "/abilities/{slug}",
             delete(abilities::delete).patch(abilities::update),
