@@ -98,6 +98,7 @@ fn get_with_and_filter(
                 .intersection(&abs)
                 .cloned()
                 .collect::<HashSet<_>>();
+            tracing::trace!("Finished updating the and abilities for tag: {tag:?}");
         }
         if let Some(ids) = items.get(tag) {
             let itms = item::find_by_ids(ids, conn)?
@@ -108,6 +109,7 @@ fn get_with_and_filter(
                 .intersection(&itms)
                 .cloned()
                 .collect::<HashSet<_>>();
+            tracing::trace!("Finished updating the and items for tag: {tag:?}");
         }
     }
     indexed_entities.extend(and_abilities);

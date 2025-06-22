@@ -105,7 +105,7 @@ pub(crate) fn find_by_ids(ids: &[i64], conn: &Connection) -> Result<Vec<Persiste
     let mut stmt = conn.prepare_cached(&format!(
         "SELECT id,name,slug,wiki_url FROM items WHERE id IN ({placeholder})"
     ))?;
-    let mut rows = stmt.query(rusqlite::params_from_iter(ids.iter()))?;
+    let mut rows = stmt.query([])?;
     let mut items = Vec::new();
     while let Some(row) = rows.next()? {
         items.push(from_row(row, conn)?);

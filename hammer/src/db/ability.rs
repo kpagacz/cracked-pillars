@@ -68,7 +68,7 @@ pub(crate) fn insert_abbreviated_ability(ability: &AbbreviatedAbility) -> Result
 fn find_abbreviated_ability_by_id(
     id: i64,
     conn: &Connection,
-) -> Result<Option<AbbreviatedAbility>, String> {
+) -> Result<Option<AbbreviatedAbility>, Error> {
     let mut stmt = conn
         .prepare("SELECT tag_name FROM abilities_tags WHERE id = ?1")
         .map_err(|_| "Failed to prepare statement".to_string())?;
@@ -86,12 +86,8 @@ fn find_abbreviated_ability_by_id(
         );
     }
 
-    let mut stmt = conn
-        .prepare("SELECT id, name, tags, wiki_url FROM abbreviated_abilities WHERE id = ?1")
-        .map_err(|_| "Failed to prepare statement".to_string())?;
-    let mut rows = stmt
-        .query([id])
-        .map_err(|_| "Failed to execute query".to_string())?;
+    let mut stmt = conn.prepare("SELECT id, name, tags, wiki_url FROM abilities WHERE id=?1")?;
+    let mut rows = stmt.query([id])?;
     if let Some(row) = rows.next().map_err(|_| "Failed to fetch row".to_string())? {
         let ability = PersistedAbbreviatedAbility {
             id: row.get(0).map_err(|_| "Failed to get id".to_string())?,
@@ -108,22 +104,12 @@ fn find_abbreviated_ability_by_id(
     }
 }
 
-fn find_ability_tags_by_id(id: i64, conn: &Connection) -> Result<Vec<String>, String> {
-    let mut stmt = conn
-        .prepare("SELECT tag_name FROM abilities_tags WHERE id = ?1")
-        .map_err(|_| "Failed to prepare statement".to_string())?;
-    let mut rows = stmt
-        .query([id])
-        .map_err(|_| "Failed to execute the statement".to_string())?;
+fn find_ability_tags_by_id(id: i64, conn: &Connection) -> Result<Vec<String>, Error> {
+    let mut stmt = conn.prepare("SELECT tag_name FROM abilities_tags WHERE ability_id=?1")?;
+    let mut rows = stmt.query([id])?;
     let mut tags = Vec::default();
-    while let Some(row) = rows
-        .next()
-        .map_err(|_| "Failed to fetch abilities_tags row".to_string())?
-    {
-        tags.push(
-            row.get(0)
-                .map_err(|_| "Failed to get the tag name".to_string())?,
-        );
+    while let Some(row) = rows.next()? {
+        tags.push(row.get(0)?);
     }
     Ok(tags)
 }
@@ -131,34 +117,24 @@ fn find_ability_tags_by_id(id: i64, conn: &Connection) -> Result<Vec<String>, St
 pub(crate) fn find_abbreviated_abilities_by_ids(
     ids: &[i64],
     conn: &Connection,
-) -> Result<Vec<PersistedAbbreviatedAbility>, String> {
+) -> Result<Vec<PersistedAbbreviatedAbility>, Error> {
     if ids.is_empty() {
         return Ok(Vec::default());
     }
 
-    fn repeat_question_mark(times: usize) -> String {
-        let mut s = "?,".repeat(times);
-        s.pop();
-        s
-    }
-    let question_marks = repeat_question_mark(ids.len());
-    let mut stmt = conn
-        .prepare(&format!(
-            "SELECT id, name, tags, wiki_url FROM abbreviated_abilities WHERE id IN ({})",
-            question_marks
-        ))
-        .map_err(|_| "Failed to prepare statement".to_string())?;
-    let mut rows = stmt
-        .query(rusqlite::params_from_iter(ids.iter()))
-        .map_err(|_| "Failed to execute query".to_string())?;
+    let placeholder = ids
+        .iter()
+        .map(|id| format!("{id}"))
+        .collect::<Vec<_>>()
+        .join(",");
+    let mut stmt = conn.prepare(&format!(
+        "SELECT id, name, slug, url FROM abilities WHERE id IN ({placeholder})"
+    ))?;
+    let mut rows = stmt.query([])?;
     let mut abilities = Vec::with_capacity(ids.len());
-    while let Some(row) = rows
-        .next()
-        .map_err(|_| "Failed to feth a row".to_string())?
-    {
-        let id: i64 = row.get(0).map_err(|_| "Failed to get id".to_string())?;
-        let tags = find_ability_tags_by_id(id, conn)
-            .map_err(|_| "Failed to get tags for the ability".to_string())?;
+    while let Some(row) = rows.next()? {
+        let id: i64 = row.get(0)?;
+        let tags = find_ability_tags_by_id(id, conn)?;
         abilities.push(PersistedAbbreviatedAbility {
             id,
             name: row.get(1).map_err(|_| "Failed to get name".to_string())?,
@@ -169,6 +145,7 @@ pub(crate) fn find_abbreviated_abilities_by_ids(
                 .map_err(|_| "Failed to get wiki_url".to_string())?,
         });
     }
+    tracing::trace!("Done with returning abilities by id");
     Ok(abilities)
 }
 
