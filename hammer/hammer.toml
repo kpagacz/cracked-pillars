@@ -1,1 +1,2 @@
 abilities_path = "./processed_abilities.json"
+items_path = "./processed_items.json"

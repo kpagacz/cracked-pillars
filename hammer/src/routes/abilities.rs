@@ -1,13 +1,14 @@
-use crate::pagination::PaginatedResponse;
+use crate::db::{delete_abbreviated_ability_by_slug, update_abbreviated_ability_by_slug};
 use axum::Json;
+use axum::extract::Path;
+use axum::http::StatusCode;
 use axum_extra::extract::Query;
 use serde::Deserialize;
 use serde_json::{Value, json};
 use std::collections::HashMap;
 use std::sync::Arc;
 
-use crate::abbreviated_ability::AbbreviatedAbility;
-use crate::ability::Ability;
+use crate::models::{AbbreviatedAbility, Ability, PaginatedResponse};
 
 fn default_filter_logic() -> String {
     String::from("or")
@@ -162,4 +163,40 @@ fn union_sorted_vecs(a: &[usize], b: &[usize]) -> Vec<usize> {
     result.extend_from_slice(&a[i..]);
     result.extend_from_slice(&b[j..]);
     result
+}
+
+#[axum::debug_handler]
+pub(crate) async fn delete(Path(slug): Path<String>) -> StatusCode {
+    match delete_abbreviated_ability_by_slug(&slug) {
+        Ok(_) => {
+            tracing::event!(tracing::Level::DEBUG, "Deleted abbreviated ability: {slug}");
+            StatusCode::NO_CONTENT
+        }
+        Err(e) => {
+            tracing::event!(
+                tracing::Level::ERROR,
+                "Failed to delete abbreviated ability: {e}"
+            );
+            StatusCode::BAD_REQUEST
+        }
+    }
+}
+
+pub(crate) async fn update(
+    Path(slug): Path<String>,
+    Json(ability): Json<AbbreviatedAbility>,
+) -> StatusCode {
+    match update_abbreviated_ability_by_slug(&slug, ability) {
+        Ok(_) => {
+            tracing::event!(tracing::Level::DEBUG, "Updated abbreviated ability: {slug}");
+            StatusCode::NO_CONTENT
+        }
+        Err(e) => {
+            tracing::event!(
+                tracing::Level::ERROR,
+                "Failed to update abbreviated ability: {e}"
+            );
+            StatusCode::BAD_REQUEST
+        }
+    }
 }

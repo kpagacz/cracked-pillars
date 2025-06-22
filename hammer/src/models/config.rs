@@ -14,4 +14,5 @@ pub(crate) static CONFIG: LazyLock<Config> = LazyLock::new(|| {
 #[derive(Serialize, Deserialize, Debug)]
 pub(crate) struct Config {
     pub(crate) abilities_path: String,
+    pub(crate) items_path: String,
 }

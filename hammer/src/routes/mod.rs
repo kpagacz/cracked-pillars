@@ -1,19 +1,16 @@
 use std::sync::Arc;
 
-pub(crate) mod abilities;
-pub(crate) mod tags;
+mod abilities;
+mod items;
+mod tags;
 
-use crate::{
-    db::{get_connection, synchronize_db},
-    index_abilities::index_abilities,
-    read_abilities::read_abilities,
+use crate::{index_abilities::index_abilities, read_abilities::read_abilities};
+use axum::{
+    Router,
+    routing::{delete, get, patch},
 };
-use axum::{Router, routing::get};
 
 pub(crate) fn get_backend_routes() -> Router<()> {
-    let db_connection = get_connection().unwrap();
-    synchronize_db(&db_connection).unwrap();
-
     let abilities = Arc::new(read_abilities().unwrap());
     let index = Arc::new(index_abilities(&abilities));
 
@@ -32,5 +29,16 @@ pub(crate) fn get_backend_routes() -> Router<()> {
                 let index = Arc::clone(&index);
                 move || tags::get(index)
             }),
+        )
+        .route(
+            "/abilities/{slug}",
+            delete(abilities::delete).patch(abilities::update),
+        )
+        .route("/items", get(items::find_all).post(items::insert))
+        .route(
+            "/items/{slug}",
+            get(items::find_by_slug)
+                .patch(items::update)
+                .delete(items::delete),
         )
 }

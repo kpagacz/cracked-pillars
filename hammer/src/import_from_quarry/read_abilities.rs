@@ -1,9 +1,8 @@
-use crate::ability::Ability;
-use crate::config::CONFIG;
 use crate::error::Error;
+use crate::models::{Ability, CONFIG};
 use std::path::Path;
 
-pub(crate) fn read_abilities() -> Result<Vec<Ability>, Error> {
+fn read_abilities() -> Result<Vec<Ability>, Error> {
     let path = &CONFIG.abilities_path;
     let path = Path::new(path);
     tracing::trace!("abilities path: {path:?}");

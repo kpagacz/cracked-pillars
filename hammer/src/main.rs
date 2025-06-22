@@ -1,12 +1,9 @@
-pub(crate) mod abbreviated_ability;
-pub(crate) mod ability;
-pub(crate) mod config;
 pub(crate) mod db;
 pub(crate) mod error;
+pub(crate) mod import_from_quarry;
 pub(crate) mod index_abilities;
-pub(crate) mod load_abilities;
-pub(crate) mod pagination;
-pub(crate) mod read_abilities;
+pub(crate) mod middleware;
+pub(crate) mod models;
 pub(crate) mod routes;
 
 use crate::routes::get_backend_routes;
@@ -24,6 +21,10 @@ async fn main() {
         ))
         .with(tracing_subscriber::fmt::layer())
         .init();
+
+    // Synchronize database
+    let conn = db::get_connection().expect("Failed to get DB connection");
+    db::synchronize_db(&conn).expect("Failed to synchronize DB");
 
     let app = Router::<()>::new()
         .route("/health", get(|| async { StatusCode::OK }))

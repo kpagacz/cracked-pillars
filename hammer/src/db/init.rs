@@ -1,7 +1,7 @@
 use crate::error::Error;
 use std::path::{Path, PathBuf};
 
-use rusqlite::{CachedStatement, Connection};
+use rusqlite::{CachedStatement, Connection, config::DbConfig};
 
 const DB_PATH: &str = "./hammer.db3";
 const MIGRATION_TABLE: &str = "migrations";
@@ -10,7 +10,11 @@ const MIGRATION_FILES_PATH: &str = "./resources/db";
 
 pub(crate) fn get_connection() -> Result<Connection, Error> {
     // Connection::open is idempotent.
-    Connection::open(DB_PATH).map_err(|_| "Failed to open a connection to the database".into())
+    let conn =
+        Connection::open(DB_PATH).map_err(|_| "Failed to open a connection to the database")?;
+    conn.set_db_config(DbConfig::SQLITE_DBCONFIG_ENABLE_FKEY, true)?;
+    conn.set_db_config(DbConfig::SQLITE_DBCONFIG_ENABLE_TRIGGER, true)?;
+    Ok(conn)
 }
 
 pub(crate) fn synchronize_db(connection: &Connection) -> Result<(), Error> {
@@ -96,7 +100,7 @@ fn execute_migration(file: &Path, connection: &Connection) -> Result<(), Error> 
         std::fs::read_to_string(file).map_err(|_| "Failed to read the migration file")?;
     connection
         .execute_batch(&commands)
-        .map_err(|_| "Failed to execute the migration file")?;
+        .map_err(|e| format!("Failed to execute the migration file: {e:?}"))?;
     Ok(())
 }
 
