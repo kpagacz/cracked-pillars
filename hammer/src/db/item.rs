@@ -60,7 +60,6 @@ pub(crate) fn find_all(conn: &Connection) -> Result<Vec<PersistedItem>, Error> {
     let mut rows = stmt.query([])?;
     let mut items = Vec::new();
     while let Some(row) = rows.next()? {
-        tracing::trace!("Row: {row:?}");
         items.push(from_row(row, conn)?);
     }
     Ok(items)
@@ -101,4 +100,21 @@ pub(crate) fn update(slug: &str, item: &Item, conn: &mut Connection) -> Result<(
     drop(stmt);
     tx.commit()?;
     Ok(())
+}
+
+pub(crate) fn find_by_ids(ids: &[i64], conn: &Connection) -> Result<Vec<PersistedItem>, Error> {
+    let placeholder = ids
+        .iter()
+        .map(|id| format!("{id}"))
+        .collect::<Vec<String>>()
+        .join(",");
+    let mut stmt = conn.prepare_cached(&format!(
+        "SELECT id,name,slug,wiki_url FROM items WHERE id IN ({placeholder})"
+    ))?;
+    let mut rows = stmt.query(rusqlite::params_from_iter(ids.iter()))?;
+    let mut items = Vec::new();
+    while let Some(row) = rows.next()? {
+        items.push(from_row(row, conn)?);
+    }
+    Ok(items)
 }

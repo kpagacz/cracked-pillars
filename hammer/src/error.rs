@@ -34,3 +34,9 @@ impl response::IntoResponse for Error {
             .unwrap_or_else(|_| Response::new(axum::body::Body::empty()))
     }
 }
+
+impl From<std::io::Error> for Error {
+    fn from(value: std::io::Error) -> Self {
+        Self(format!("IO Error: {value:?}"))
+    }
+}

@@ -1,8 +1,8 @@
+use crate::db::{self, tag};
+use crate::error::Error;
 use axum::Json;
-use serde_json::{Value, json};
-use std::collections::HashMap;
-use std::sync::Arc;
 
-pub(crate) async fn get(index: Arc<HashMap<String, Vec<usize>>>) -> Json<Value> {
-    Json(json!(index.keys().cloned().collect::<Vec<String>>()))
+#[axum::debug_handler]
+pub(crate) async fn get() -> Result<Json<Vec<String>>, Error> {
+    Ok(Json(tag::find_all(&db::get_connection()?)?))
 }

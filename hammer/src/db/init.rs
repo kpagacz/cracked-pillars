@@ -1,17 +1,17 @@
 use crate::error::Error;
 use std::path::{Path, PathBuf};
 
+use crate::models::CONFIG;
 use rusqlite::{CachedStatement, Connection, config::DbConfig};
 
-const DB_PATH: &str = "./hammer.db3";
 const MIGRATION_TABLE: &str = "migrations";
 const MIGRATION_FILE_NAME_COLUMN: &str = "name";
 const MIGRATION_FILES_PATH: &str = "./resources/db";
 
 pub(crate) fn get_connection() -> Result<Connection, Error> {
     // Connection::open is idempotent.
-    let conn =
-        Connection::open(DB_PATH).map_err(|_| "Failed to open a connection to the database")?;
+    let conn = Connection::open(&CONFIG.db_path)
+        .map_err(|_| "Failed to open a connection to the database")?;
     conn.set_db_config(DbConfig::SQLITE_DBCONFIG_ENABLE_FKEY, true)?;
     conn.set_db_config(DbConfig::SQLITE_DBCONFIG_ENABLE_TRIGGER, true)?;
     Ok(conn)

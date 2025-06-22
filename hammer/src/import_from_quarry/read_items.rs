@@ -3,7 +3,7 @@ use crate::models::CONFIG;
 use crate::models::{Item, JsonItem};
 use std::path::Path;
 
-fn read_items() -> Result<Vec<Item>, Error> {
+pub(super) fn read_items() -> Result<Vec<Item>, Error> {
     let path = &CONFIG.items_path;
     let path = Path::new(path);
     tracing::trace!("items path: {path:?}");

@@ -35,7 +35,7 @@ CREATE TABLE items_tags (
 
 -- Effect tags
 CREATE TABLE tags (
-    name TEXT NOT NULL
+    name TEXT PRIMARY KEY
 );
 
 -- Indexes

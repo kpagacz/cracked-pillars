@@ -1,7 +1,42 @@
-use crate::models::{AbbreviatedAbility, PersistedAbbreviatedAbility};
+use crate::{
+    error::Error,
+    models::{AbbreviatedAbility, PersistedAbbreviatedAbility},
+};
 use rusqlite::Connection;
 
-pub(crate) fn insert_abbreviated_ability(ability: &AbbreviatedAbility) -> Result<(), String> {
+pub(crate) fn find_all(conn: &Connection) -> Result<Vec<PersistedAbbreviatedAbility>, Error> {
+    let mut stmt = conn.prepare("SELECT * FROM abilites")?;
+    let mut rows = stmt.query([])?;
+    let mut abilities = Vec::new();
+    while let Some(row) = rows.next()? {
+        abilities.push(from_row(row, conn)?);
+    }
+    Ok(abilities)
+}
+
+fn from_row(row: &rusqlite::Row, conn: &Connection) -> Result<PersistedAbbreviatedAbility, Error> {
+    let id = row.get(0)?;
+    let slug = row.get(1)?;
+    let name = row.get(2)?;
+    let wiki_url = row.get(3)?;
+
+    let mut stmt = conn.prepare("SELECT tag_name FROM abilities_tags WHERE id=?1")?;
+    let mut tags = Vec::new();
+    let mut rows = stmt.query([id])?;
+    while let Some(row) = rows.next()? {
+        tags.push(row.get(0)?);
+    }
+
+    Ok(PersistedAbbreviatedAbility {
+        id,
+        slug,
+        name,
+        tags,
+        wiki_url,
+    })
+}
+
+pub(crate) fn insert_abbreviated_ability(ability: &AbbreviatedAbility) -> Result<(), Error> {
     let mut conn =
         crate::db::get_connection().map_err(|e| format!("Failed to get DB connection: {e:?}"))?;
     let tx = conn.transaction().map_err(|e| {
@@ -16,18 +51,21 @@ pub(crate) fn insert_abbreviated_ability(ability: &AbbreviatedAbility) -> Result
             &ability.slug,
             &ability.wiki_url
         ])
-        .map_err(|e| format!("Failed to insert ability: {e:?}"))?;
+        .map_err(|e| format!("Failed to insert ability {ability:?}: {e:?}"))?;
     tracing::event!(
         tracing::Level::TRACE,
         "Inserted abbreviated ability with id {id}"
     );
+    drop(stmt);
     let mut stmt = tx
-        .prepare("INSERT INTO abilities_tags (id, tag_name) VALUES (?1, ?2)")
+        .prepare("INSERT INTO abilities_tags (ability_id, tag_name) VALUES (?1, ?2)")
         .map_err(|e| format!("Failed to prepare the statement: {e:?}"))?;
     for tag in &ability.tags {
         stmt.insert(rusqlite::params![id, tag])
             .map_err(|e| format!("Failed to insert ability tag: {e:?}"))?;
     }
+    drop(stmt);
+    tx.commit()?;
     Ok(())
 }
 
@@ -94,7 +132,7 @@ fn find_ability_tags_by_id(id: i64, conn: &Connection) -> Result<Vec<String>, St
     Ok(tags)
 }
 
-fn find_abbreviated_abilities_by_ids(
+pub(crate) fn find_abbreviated_abilities_by_ids(
     ids: &[i64],
     conn: &Connection,
 ) -> Result<Vec<PersistedAbbreviatedAbility>, String> {
