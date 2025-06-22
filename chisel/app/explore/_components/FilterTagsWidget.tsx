@@ -30,8 +30,19 @@ export function FilterTagsWidget({
     setSearchedTags([...searchedTags, tag]);
     setRecommendedTags(recommendedTags.filter((t) => t !== tag));
   };
+  const onTagRemoved = (tag: string) => {
+    const newSearchedTags = searchedTags.filter((t) => t !== tag);
+    setSearchedTags(newSearchedTags);
+    // Recalculate recommendedTags based on current search and remaining selected tags
+    const filtered = tags.filter(
+      (tag) => tag.startsWith(searchText) && !newSearchedTags.includes(tag),
+    );
+    setRecommendedTags(filtered);
+  };
   const clearTags = () => {
     setSearchedTags([]);
+    setRecommendedTags(tags);
+    setSearchText("");
   };
   const onFormSubmitted: EventHandler<MouseEvent<HTMLFormElement>> = (e) => {
     e.preventDefault();
@@ -86,12 +97,16 @@ export function FilterTagsWidget({
             </h3>
             <div className="flex flex-wrap gap-2 mb-4">
               {searchedTags.map((tag) => (
-                <span
+                <button
                   key={tag}
-                  className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-highlight/20 text-highlight border border-highlight/30"
+                  onClick={() => onTagRemoved(tag)}
+                  className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm bg-highlight/20 text-highlight border border-highlight/30 hover:bg-highlight/30 transition-all duration-200 group"
                 >
-                  {tag}
-                </span>
+                  <span>{tag}</span>
+                  <span className="text-highlight/70 group-hover:text-highlight transition-colors duration-200">
+                    ×
+                  </span>
+                </button>
               ))}
             </div>
           </div>
