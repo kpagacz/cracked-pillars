@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  # Backend service (Rust API)
+  backend:
+    build:
+      context: .
+      dockerfile: hammer/Dockerfile
+    container_name: hammer-backend
+    ports:
+      - "8001:8000"
+    volumes:
+      # Persist the SQLite database
+      - hammer_data:/app/data
+      # Mount the JSON data files for easy updates
+      - ./quarry/post_processed_abilities.json:/app/abilities.json:ro
+      - ./quarry/post_processed_items.json:/app/items.json:ro
+    environment:
+      - RUST_LOG=hammer=info,tower_http=info
+    # restart: unless-stopped
+    networks:
+      - app-network
+
+  # Frontend service (Next.js)
+  frontend:
+    build:
+      context: ./chisel
+      dockerfile: Dockerfile
+    container_name: chisel-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+    depends_on:
+      - backend
+    # restart: unless-stopped
+    networks:
+      - app-network
+
+# Named volumes for data persistence
+volumes:
+  hammer_data:
+    driver: local
+
+# Custom network for service communication
+networks:
+  app-network:
+    driver: bridge

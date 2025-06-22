@@ -45,6 +45,7 @@ async fn main() {
         .any(|arg| arg.as_str() == "--import-from-quarry")
     {
         import_from_quarry();
+        return;
     }
 
     // Index abilities and items

@@ -7,11 +7,18 @@ export interface Item {
   wiki_url: string;
 }
 
+interface RawItem {
+  name: string;
+  slug: string;
+  tags: string[];
+  wiki_url: string;
+}
+
 export async function fetchItemsByTags(tags: string[]): Promise<Item[]> {
   const searchParams = new URLSearchParams();
   tags.forEach((tag) => searchParams.append("tags", tag));
   searchParams.append("filter_logic", "and");
-  let abilitiesApi = `http://${process.env.NEXT_PUBLIC_API_URL}/indexed?${searchParams}`;
+  const abilitiesApi = `http://${process.env.NEXT_PUBLIC_API_URL}/indexed?${searchParams}`;
   try {
     const response = await fetch(abilitiesApi);
     const data = await response.json();
@@ -30,7 +37,7 @@ export async function fetchAllItems(): Promise<Item[]> {
     );
     const items = await itemsResponse.json();
     console.log("Fetched all items: ", items);
-    const properItems: Item[] = items.map((item: any) => {
+    const properItems: Item[] = items.map((item: RawItem) => {
       return {
         name: item.name,
         slug: item.slug,
@@ -44,7 +51,7 @@ export async function fetchAllItems(): Promise<Item[]> {
     );
     const abilities = await abilitiesResponse.json();
     console.log("Fetched all abilities: ", abilities);
-    const properAbilities: Item[] = abilities.map((ability: any) => {
+    const properAbilities: Item[] = abilities.map((ability: RawItem) => {
       return {
         name: ability.name,
         slug: ability.slug,

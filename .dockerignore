@@ -1,0 +1,37 @@
+# Git
+.git
+.gitignore
+
+# Documentation
+README.md
+DOCKER_DEPLOYMENT.md
+plan.md
+LICENSE
+
+# Frontend (chisel)
+chisel/
+
+# Backend build artifacts
+hammer/target/
+hammer/*.db3
+hammer/.DS_Store
+
+# Quarry processing files (keep only the final processed files)
+quarry/*.py
+quarry/*.sh
+quarry/requirements.txt
+quarry/pyvenv.cfg
+quarry/README.md
+quarry/tags.md
+quarry/examples/
+quarry/jsonschemas/
+quarry/*.csv
+quarry/*.html
+quarry/*.json
+!quarry/post_processed_abilities.json
+!quarry/post_processed_items.json
+
+# Hammer development files
+hammer/test_abilities.sh
+hammer/processed_abilities.json
+hammer/processed_items.json
