@@ -1,3 +1,8 @@
+-- Effect tags
+CREATE TABLE tags (
+    name TEXT NOT NULL PRIMARY KEY
+);
+
 -- Abilities
 CREATE TABLE abilities (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -33,18 +38,12 @@ CREATE TABLE items_tags (
   FOREIGN KEY (tag_name) REFERENCES tags(name) ON DELETE CASCADE
 );
 
--- Effect tags
-CREATE TABLE tags (
-    name TEXT PRIMARY KEY
-);
-
 -- Indexes
 CREATE INDEX idx_abiltiies_slug ON abilities(slug);
 CREATE INDEX idx_tags_name ON tags(name);
 CREATE INDEX idx_items_name ON items(name);
 CREATE INDEX idx_abilities_tags_ability_id ON abilities_tags(ability_id);
 CREATE INDEX idx_items_tags_item_id ON items_tags(item_id);
-
 
 -- Create a trigger to update the updated_at timestamp
 CREATE TRIGGER update_abilities_timestamp

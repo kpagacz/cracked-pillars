@@ -31,7 +31,7 @@ fn from_row(row: &rusqlite::Row, conn: &Connection) -> Result<PersistedItem, Err
     let wiki_url = row.get(3)?;
     let effects_description = row.get(4).unwrap_or("".to_string());
     let mut tags = Vec::default();
-    let mut stmt = conn.prepare("SELECT (item_id, tag_hame) FROM items_tags WHERE item_id=?1")?;
+    let mut stmt = conn.prepare("SELECT item_id,tag_name FROM items_tags WHERE item_id=?1")?;
     let mut rows = stmt.query(rusqlite::params![id])?;
     while let Some(row) = rows.next()? {
         let tag_name = row.get(1)?;

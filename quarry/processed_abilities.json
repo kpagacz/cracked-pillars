@@ -27083,7 +27083,7 @@
     ]
   },
   {
-    "name": "Merge",
+    "name": "Merge_(item_ability)",
     "url": "https://pillarsofeternity.fandom.com/wiki/Merge_(item_ability)",
     "description": "The wielder merges with target Ally, granting them a huge bonus to both Power Level and Health, but removing the wielder from combat.",
     "activation": "active",

@@ -21,8 +21,6 @@ fn get_tags(abilities: &[AbbreviatedAbility], items: &[Item]) -> Vec<String> {
 }
 
 pub(crate) fn import_to_db() -> Result<(), Error> {
-    // Remove old db
-    std::fs::remove_file(&CONFIG.db_path)?;
     // Load items and abilities from JSON
     let items = read_items()?;
     let abilities = read_abilities()?;

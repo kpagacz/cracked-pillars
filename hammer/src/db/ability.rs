@@ -5,7 +5,7 @@ use crate::{
 use rusqlite::Connection;
 
 pub(crate) fn find_all(conn: &Connection) -> Result<Vec<PersistedAbbreviatedAbility>, Error> {
-    let mut stmt = conn.prepare("SELECT * FROM abilites")?;
+    let mut stmt = conn.prepare("SELECT * FROM abilities")?;
     let mut rows = stmt.query([])?;
     let mut abilities = Vec::new();
     while let Some(row) = rows.next()? {
@@ -20,7 +20,7 @@ fn from_row(row: &rusqlite::Row, conn: &Connection) -> Result<PersistedAbbreviat
     let name = row.get(2)?;
     let wiki_url = row.get(3)?;
 
-    let mut stmt = conn.prepare("SELECT tag_name FROM abilities_tags WHERE id=?1")?;
+    let mut stmt = conn.prepare("SELECT tag_name FROM abilities_tags WHERE ability_id=?1")?;
     let mut tags = Vec::new();
     let mut rows = stmt.query([id])?;
     while let Some(row) = rows.next()? {
