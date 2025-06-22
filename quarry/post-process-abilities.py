@@ -8,15 +8,18 @@ from typing import List, Dict, Callable, Optional
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
+    format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler('ability_post_processing.log'),
-        logging.StreamHandler()
-    ]
+        logging.FileHandler("ability_post_processing.log"),
+        logging.StreamHandler(),
+    ],
 )
 logger = logging.getLogger(__name__)
 
-def filter_abilities_by_criteria(abilities: List[Dict], filter_func: Callable[[Dict], bool]) -> List[Dict]:
+
+def filter_abilities_by_criteria(
+    abilities: List[Dict], filter_func: Callable[[Dict], bool]
+) -> List[Dict]:
     """
     Filter abilities based on a custom filter function.
 
@@ -42,7 +45,12 @@ def filter_abilities_by_criteria(abilities: List[Dict], filter_func: Callable[[D
 
     return filtered_abilities
 
-def post_process_abilities(input_file: Path, output_file: Path, filter_func: Optional[Callable[[Dict], bool]] = None) -> None:
+
+def post_process_abilities(
+    input_file: Path,
+    output_file: Path,
+    filter_func: Optional[Callable[[Dict], bool]] = None,
+) -> None:
     """
     Post-process abilities by applying custom filtering criteria.
 
@@ -55,12 +63,15 @@ def post_process_abilities(input_file: Path, output_file: Path, filter_func: Opt
 
     # Load the original processed abilities
     try:
-        with open(input_file, 'r', encoding='utf-8') as f:
+        with open(input_file, "r", encoding="utf-8") as f:
             abilities = json.load(f)
         logger.info(f"Loaded {len(abilities)} abilities from {input_file}")
     except Exception as e:
         logger.error(f"Failed to load abilities from {input_file}: {str(e)}")
         raise
+
+    # Store original count for summary
+    original_count = len(abilities)
 
     # Apply filtering if a filter function is provided
     if filter_func is not None:
@@ -68,7 +79,7 @@ def post_process_abilities(input_file: Path, output_file: Path, filter_func: Opt
 
     # Save the processed abilities
     try:
-        with open(output_file, 'w', encoding='utf-8') as f:
+        with open(output_file, "w", encoding="utf-8") as f:
             json.dump(abilities, f, indent=2, ensure_ascii=False)
         logger.info(f"Saved processed abilities to {output_file}")
     except Exception as e:
@@ -77,41 +88,83 @@ def post_process_abilities(input_file: Path, output_file: Path, filter_func: Opt
 
     # Print summary statistics
     print(f"\nPost-processing Summary:")
-    print(f"Original abilities: {len(abilities)}")
+    print(f"Original abilities: {original_count}")
     if filter_func is not None:
         print(f"Filtering applied: Yes")
     else:
         print(f"Filtering applied: No")
     print(f"Final abilities: {len(abilities)}")
 
+
 # Example filter functions that can be used or extended
 def filter_offensive_abilities(ability: Dict) -> bool:
     """Filter to keep only offensive abilities."""
-    keywords = ability.get('keywords', [])
-    return any(keyword.lower() in ['offensive', 'damage', 'attack'] for keyword in keywords)
+    keywords = ability.get("keywords", [])
+    return any(
+        keyword.lower() in ["offensive", "damage", "attack"] for keyword in keywords
+    )
+
 
 def filter_by_activation_type(ability: Dict, activation_type: str) -> bool:
     """Filter abilities by activation type (active, passive, modal)."""
-    return ability.get('activation', '').lower() == activation_type.lower()
+    return ability.get("activation", "").lower() == activation_type.lower()
+
 
 def filter_by_class(ability: Dict, class_name: str) -> bool:
     """Filter abilities by class."""
-    origin = ability.get('origin', {})
-    if origin.get('type') == 'progression':
-        class_info = origin.get('value', {}).get('class', '')
+    origin = ability.get("origin", {})
+    if origin.get("type") == "progression":
+        class_info = origin.get("value", {}).get("class", "")
         return class_info.lower() == class_name.lower()
     return False
 
+
 def filter_abilities_with_effects(ability: Dict) -> bool:
     """Filter to keep only abilities that have effects."""
-    effects = ability.get('effects', [])
+    effects = ability.get("effects", [])
     return len(effects) > 0
+
+
+def filter_by_origin_type_and_class(ability: Dict) -> bool:
+    """
+    Filter abilities to keep only those with:
+    - origin type = "item" OR
+    - origin type = "progression" AND class in ["priest", "chanter", "rogue", "cipher", "ranger", "fighter", "paladin", "wizard", "monk", "druid", "barbarian"]
+    """
+    origin = ability.get("origin", {})
+    origin_type = origin.get("type", "")
+
+    # Keep items
+    if origin_type == "item":
+        return True
+
+    # Check progression abilities for specific classes
+    if origin_type == "progression":
+        class_info = origin.get("value", {}).get("class", "")
+        allowed_classes = [
+            "priest",
+            "chanter",
+            "rogue",
+            "cipher",
+            "ranger",
+            "fighter",
+            "paladin",
+            "wizard",
+            "monk",
+            "druid",
+            "barbarian",
+        ]
+        return class_info.lower() in [cls.lower() for cls in allowed_classes]
+
+    # Filter out everything else
+    return False
+
 
 def main():
     """Main function to run the post-processing."""
     # Define file paths
-    input_file = Path(__file__).parent / 'processed_abilities.json'
-    output_file = Path(__file__).parent / 'post_processed_abilities.json'
+    input_file = Path(__file__).parent / "processed_abilities.json"
+    output_file = Path(__file__).parent / "post_processed_abilities.json"
 
     # Check if input file exists
     if not input_file.exists():
@@ -125,8 +178,8 @@ def main():
     # filter_func = lambda ability: filter_by_class(ability, 'wizard')  # Keep only wizard abilities
     # filter_func = filter_abilities_with_effects  # Keep only abilities with effects
 
-    # For now, no filtering is applied (pass None as filter_func)
-    filter_func = None
+    # Apply filtering by origin type and class
+    filter_func = filter_by_origin_type_and_class
 
     try:
         post_process_abilities(input_file, output_file, filter_func)
@@ -135,6 +188,7 @@ def main():
     except Exception as e:
         logger.error(f"Post-processing failed: {str(e)}")
         print(f"Error: Post-processing failed: {str(e)}")
+
 
 if __name__ == "__main__":
     main()
