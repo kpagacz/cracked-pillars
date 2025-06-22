@@ -1,11 +1,10 @@
 import ExplorePage from "./_components/ExplorePage";
-import { Item } from "./server-functions/fetchItems";
+import { fetchAllItems, Item } from "./server-functions/fetchItems";
 import fetchTags from "./server-functions/fetchTags";
 
 export default function () {
-  const allItems: Item[] =
-    // TODO actually fetch items
-    [];
+  const allItems: Promise<Item[]> = fetchAllItems();
+
   const tags = fetchTags();
-  return <ExplorePage initialItems={allItems} tags={tags} />;
+  return <ExplorePage initialItemsPromise={allItems} tags={tags} />;
 }

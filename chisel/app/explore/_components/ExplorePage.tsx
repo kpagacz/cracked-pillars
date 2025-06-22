@@ -4,16 +4,17 @@ import { FilterTagsWidget } from "./FilterTagsWidget";
 import ItemsLoadingFallback from "../_components/ItemsLoadingFallback";
 import ResultsOverview from "./ResultsOverview";
 import { Item } from "../server-functions/fetchItems";
-import { Suspense, useState, useTransition } from "react";
+import { Suspense, use, useState, useTransition } from "react";
 import { fetchItemsByTags } from "../server-functions/fetchItems";
 
 export default function ExplorePage({
-  initialItems,
+  initialItemsPromise,
   tags,
 }: {
-  initialItems: Item[];
+  initialItemsPromise: Promise<Item[]>;
   tags: Promise<string[]>;
 }) {
+  const initialItems = use(initialItemsPromise);
   const [, startTransition] = useTransition();
   const [items, setItems] = useState(initialItems);
   const onFilterFormSubmitted = (tags: string[]) =>

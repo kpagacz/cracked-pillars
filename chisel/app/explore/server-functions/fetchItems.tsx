@@ -2,6 +2,7 @@
 
 export interface Item {
   name: string;
+  slug: string;
   tags: string[];
   wiki_url: string;
 }
@@ -9,14 +10,51 @@ export interface Item {
 export async function fetchItemsByTags(tags: string[]): Promise<Item[]> {
   const searchParams = new URLSearchParams();
   tags.forEach((tag) => searchParams.append("tags", tag));
-  searchParams.append("per_page", "1000");
-  let abilitiesApi = `http://${process.env.NEXT_PUBLIC_API_URL}/abilities?${searchParams}`;
+  searchParams.append("filter_logic", "and");
+  let abilitiesApi = `http://${process.env.NEXT_PUBLIC_API_URL}/indexed?${searchParams}`;
   try {
     const response = await fetch(abilitiesApi);
     const data = await response.json();
-    return data.data as Item[];
+    console.log("Fetched items by tags: ", data);
+    return data as Item[];
   } catch (error) {
     console.error("Error fetching items by tags: ", error);
+    return [];
+  }
+}
+
+export async function fetchAllItems(): Promise<Item[]> {
+  try {
+    const itemsResponse = await fetch(
+      `http://${process.env.NEXT_PUBLIC_API_URL}/items`,
+    );
+    const items = await itemsResponse.json();
+    console.log("Fetched all items: ", items);
+    const properItems: Item[] = items.map((item: any) => {
+      return {
+        name: item.name,
+        slug: item.slug,
+        tags: item.tags,
+        wiki_url: item.wiki_url,
+      };
+    });
+
+    const abilitiesResponse = await fetch(
+      `http://${process.env.NEXT_PUBLIC_API_URL}/abilities`,
+    );
+    const abilities = await abilitiesResponse.json();
+    console.log("Fetched all abilities: ", abilities);
+    const properAbilities: Item[] = abilities.map((ability: any) => {
+      return {
+        name: ability.name,
+        slug: ability.slug,
+        tags: ability.tags,
+        wiki_url: ability.wiki_url,
+      };
+    });
+    return [...properItems, ...properAbilities];
+  } catch (error) {
+    console.error("Error fetching all items: ", error);
     return [];
   }
 }
