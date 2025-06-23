@@ -2,8 +2,10 @@ use serde::{Deserialize, Serialize};
 use std::sync::LazyLock;
 
 pub(crate) static CONFIG: LazyLock<Config> = LazyLock::new(|| {
+    let config_file =
+        std::env::var("HAMMER_CONFIG_FILE").unwrap_or_else(|_| "./hammer.toml".into());
     let settings = match config::Config::builder()
-        .add_source(config::File::with_name("/app/hammer.toml"))
+        .add_source(config::File::with_name(&config_file))
         .add_source(config::Environment::with_prefix("HAMMER"))
         .build()
     {

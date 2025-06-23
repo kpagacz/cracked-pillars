@@ -16,7 +16,6 @@ COPY hammer/Cargo.toml hammer/Cargo.lock ./
 RUN mkdir src
 
 # Remove the dummy main.rs and copy the actual source code
-RUN rm src/main.rs
 COPY hammer/src ./src
 
 # Clean and build the application
@@ -41,7 +40,7 @@ WORKDIR /app
 COPY --from=builder /app/target/release/hammer /app/hammer
 
 # Copy the configuration file
-COPY hammer/hammer.toml ./hammer.toml
+COPY hammer/hammer-prod.toml ./hammer.toml
 
 # Copy the JSON data files
 COPY hammer/abilities.json hammer/items.json ./
