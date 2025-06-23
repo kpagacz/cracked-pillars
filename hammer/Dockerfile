@@ -1,10 +1,10 @@
-# Use the latest nightly Rust image
-FROM rustlang/rust:nightly-slim
+# Build stage
+FROM rustlang/rust:nightly-slim AS builder
 
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies
+# Install system dependencies for building
 RUN apt-get update && apt-get install -y \
     sqlite3 \
     libsqlite3-dev \
@@ -13,12 +13,32 @@ RUN apt-get update && apt-get install -y \
 # Copy the Cargo files for dependency caching
 COPY hammer/Cargo.toml hammer/Cargo.lock ./
 
-# Create a dummy main.rs to build dependencies
-RUN mkdir src && echo "fn main() {}" > src/main.rs
+RUN mkdir src
 
 # Remove the dummy main.rs and copy the actual source code
 RUN rm src/main.rs
 COPY hammer/src ./src
+
+# Clean and build the application
+RUN cargo clean && cargo build --release
+
+# Runtime stage
+FROM debian:bookworm-slim
+
+# Install runtime dependencies only
+RUN apt-get update && apt-get install -y \
+    sqlite3 \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create app user for security
+RUN groupadd -r appuser && useradd -r -g appuser appuser
+
+# Set working directory
+WORKDIR /app
+
+# Copy the binary from builder stage
+COPY --from=builder /app/target/release/hammer /app/hammer
 
 # Copy the configuration file
 COPY hammer/hammer.toml ./hammer.toml
@@ -38,17 +58,11 @@ RUN mkdir -p /app/migrations
 # Copy the migration files
 COPY hammer/resources/db /app/migrations
 
-# Clean
-RUN cargo clean
+# Change ownership to appuser
+RUN chown -R appuser:appuser /app
 
-# Build the application
-RUN cargo build --release
-
-# Debug: List the contents of target/release to verify the binary is present
-RUN ls -l target/release/
-
-# Copy the compiled binary to /app/hammer
-RUN cp target/release/hammer /app/hammer && chmod +x /app/hammer
+# Switch to appuser
+USER appuser
 
 # Expose the port the app runs on
 EXPOSE 8000
