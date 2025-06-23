@@ -6,7 +6,6 @@ use rusqlite::{CachedStatement, Connection, config::DbConfig};
 
 const MIGRATION_TABLE: &str = "migrations";
 const MIGRATION_FILE_NAME_COLUMN: &str = "name";
-const MIGRATION_FILES_PATH: &str = "./resources/db";
 
 pub(crate) fn get_connection() -> Result<Connection, Error> {
     // Connection::open is idempotent.
@@ -61,7 +60,7 @@ fn execute_missing_migrations(connection: &Connection) -> Result<(), Error> {
 }
 
 fn list_migration_files() -> Result<Vec<PathBuf>, Error> {
-    let paths = std::fs::read_dir(MIGRATION_FILES_PATH)
+    let paths = std::fs::read_dir(&CONFIG.db_migrations)
         .map_err(|_| "Failed to read migration directory")?;
     paths
         .map(|res| {

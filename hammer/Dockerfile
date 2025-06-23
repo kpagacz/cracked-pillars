@@ -1,68 +1,57 @@
-# Use the nightly Rust image as the base image for edition 2024 support
-FROM rustlang/rust:nightly-alpine AS base
+# Use the latest nightly Rust image
+FROM rustlang/rust:nightly-slim
 
-# Install build dependencies including SQLite
-RUN apk add --no-cache musl-dev sqlite-dev
-
-# Create a new empty shell project
+# Set working directory
 WORKDIR /app
 
-# Copy manifests
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    sqlite3 \
+    libsqlite3-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy the Cargo files for dependency caching
 COPY hammer/Cargo.toml hammer/Cargo.lock ./
 
 # Create a dummy main.rs to build dependencies
 RUN mkdir src && echo "fn main() {}" > src/main.rs
 
-# Build dependencies - this is the caching Docker layer
+# Build dependencies (this layer will be cached)
 RUN cargo build --release
 
-# Remove the dummy main.rs
+# Remove the dummy main.rs and copy the actual source code
 RUN rm src/main.rs
-
-# Copy the real source code
 COPY hammer/src ./src
 
 # Build the application
 RUN cargo build --release
 
-# Create a new stage with a minimal runtime image
-FROM alpine:latest AS runtime
+# Debug: List the contents of target/release to verify the binary is present
+RUN ls -l target/release/
 
-# Install runtime dependencies including SQLite
-RUN apk add --no-cache libgcc sqlite
+# Copy the configuration file
+COPY hammer/hammer.toml ./hammer.toml
 
-# Create a non-root user
-RUN addgroup -g 1001 -S appgroup && \
-    adduser -u 1001 -S appuser -G appgroup
+# Copy the JSON data files
+COPY hammer/abilities.json hammer/items.json ./
 
-# Copy the binary from the builder stage
-COPY --from=base /app/target/release/hammer /usr/local/bin/hammer
+# Create data directory for the database
+RUN mkdir -p /app/data
 
-# Copy configuration file
-COPY hammer/hammer.toml /app/hammer.toml
+# Copy the existing database file
+COPY hammer/hammer.db3 /app/data/hammer.db3
 
-# Copy the resources directory for database migrations
-COPY hammer/resources /app/resources
+# Create the migrations directory
+RUN mkdir -p /app/migrations
 
-# Copy the actual JSON files from quarry directory (not symlinks)
-COPY quarry/post_processed_abilities.json /app/abilities.json
-COPY quarry/post_processed_items.json /app/items.json
+# Copy the migration files
+COPY hammer/resources/db /app/migrations
 
-# Copy entrypoint script
-COPY hammer/entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
-
-# Create data directory and set permissions
-RUN mkdir -p /app/data && chown -R appuser:appgroup /app
-
-# Switch to non-root user
-USER appuser
-
-# Set working directory
-WORKDIR /app
+# Copy the compiled binary to /app/hammer
+RUN cp target/release/hammer /app/hammer && chmod +x /app/hammer
 
 # Expose the port the app runs on
 EXPOSE 8000
 
-# Use entrypoint script
-ENTRYPOINT ["/app/entrypoint.sh"]
+# Set the entrypoint
+ENTRYPOINT ["/app/hammer --skip-db-sync"]

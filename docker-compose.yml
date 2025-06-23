@@ -10,8 +10,6 @@ services:
     ports:
       - "8001:8000"
     volumes:
-      # Persist the SQLite database
-      - hammer_data:/app/data
       # Mount the JSON data files for easy updates
       - ./quarry/post_processed_abilities.json:/app/abilities.json:ro
       - ./quarry/post_processed_items.json:/app/items.json:ro
@@ -37,11 +35,6 @@ services:
     # restart: unless-stopped
     networks:
       - app-network
-
-# Named volumes for data persistence
-volumes:
-  hammer_data:
-    driver: local
 
 # Custom network for service communication
 networks:

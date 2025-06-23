@@ -13,7 +13,6 @@ chisel/
 
 # Backend build artifacts
 hammer/target/
-hammer/*.db3
 hammer/.DS_Store
 
 # Quarry processing files (keep only the final processed files)

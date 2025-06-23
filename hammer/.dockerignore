@@ -1,8 +1,6 @@
 Dockerfile
 .dockerignore
 target
-Cargo.lock
-*.db3
 .git
 .gitignore
 README.md

@@ -35,9 +35,11 @@ async fn main() {
     }
 
     // Synchronize database
-    let conn = db::get_connection().expect("Failed to get DB connection");
-    db::synchronize_db(&conn).expect("Failed to synchronize DB");
-    drop(conn);
+    if !args.iter().any(|arg| arg.as_str() == "--skip-db-sync") {
+        let conn = db::get_connection().expect("Failed to get DB connection");
+        db::synchronize_db(&conn).expect("Failed to synchronize DB");
+        drop(conn);
+    }
 
     // Import files to database if needed
     if args
