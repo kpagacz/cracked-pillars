@@ -84,6 +84,6 @@ fn import_from_quarry() {
 fn reset_db() {
     match std::fs::remove_file(&CONFIG.db_path) {
         Ok(_) => tracing::debug!("Removed the database"),
-        Err(err) => tracing::warn!("Failed to remove the database. Remove the db file manually."),
+        Err(_) => tracing::warn!("Failed to remove the database. Remove the db file manually."),
     }
 }

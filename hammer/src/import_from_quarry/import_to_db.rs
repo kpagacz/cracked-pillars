@@ -1,7 +1,6 @@
 use crate::db;
 use crate::error::Error;
 use crate::models::AbbreviatedAbility;
-use crate::models::CONFIG;
 use crate::models::Item;
 
 use super::read_abilities::read_abilities;

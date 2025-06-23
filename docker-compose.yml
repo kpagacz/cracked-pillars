@@ -15,7 +15,7 @@ services:
       - ./quarry/post_processed_items.json:/app/items.json:ro
     environment:
       - RUST_LOG=hammer=info,tower_http=info
-    # restart: unless-stopped
+    restart: unless-stopped
     networks:
       - app-network
 
@@ -32,7 +32,7 @@ services:
       - NEXT_TELEMETRY_DISABLED=1
     depends_on:
       - backend
-    # restart: unless-stopped
+    restart: unless-stopped
     networks:
       - app-network
 

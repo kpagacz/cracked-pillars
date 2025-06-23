@@ -65,45 +65,6 @@ pub(crate) fn insert_abbreviated_ability(ability: &AbbreviatedAbility) -> Result
     Ok(())
 }
 
-fn find_abbreviated_ability_by_id(
-    id: i64,
-    conn: &Connection,
-) -> Result<Option<AbbreviatedAbility>, Error> {
-    let mut stmt = conn
-        .prepare("SELECT tag_name FROM abilities_tags WHERE id = ?1")
-        .map_err(|_| "Failed to prepare statement".to_string())?;
-    let mut rows = stmt
-        .query([id])
-        .map_err(|_| "Failed to execute query".to_string())?;
-    let mut tags = Vec::default();
-    while let Some(row) = rows
-        .next()
-        .map_err(|_| "Failed to fetch abilities_tags row".to_string())?
-    {
-        tags.push(
-            row.get(0)
-                .map_err(|_| "Failed to get the tag name".to_string())?,
-        );
-    }
-
-    let mut stmt = conn.prepare("SELECT id, name, tags, wiki_url FROM abilities WHERE id=?1")?;
-    let mut rows = stmt.query([id])?;
-    if let Some(row) = rows.next().map_err(|_| "Failed to fetch row".to_string())? {
-        let ability = PersistedAbbreviatedAbility {
-            id: row.get(0).map_err(|_| "Failed to get id".to_string())?,
-            name: row.get(1).map_err(|_| "Failed to get name".to_string())?,
-            slug: row.get(2).map_err(|_| "Failed to get slug".to_string())?,
-            tags,
-            wiki_url: row
-                .get(3)
-                .map_err(|_| "Failed to get wiki_url".to_string())?,
-        };
-        Ok(Some(ability.into()))
-    } else {
-        Ok(None)
-    }
-}
-
 fn find_ability_tags_by_id(id: i64, conn: &Connection) -> Result<Vec<String>, Error> {
     let mut stmt = conn.prepare("SELECT tag_name FROM abilities_tags WHERE ability_id=?1")?;
     let mut rows = stmt.query([id])?;

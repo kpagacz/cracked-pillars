@@ -4,13 +4,13 @@ fn default_filter_logic() -> String {
     String::from("or")
 }
 
-fn default_page() -> usize {
-    1
-}
-
-fn default_per_page() -> usize {
-    20
-}
+// fn default_page() -> usize {
+//     1
+// }
+//
+// fn default_per_page() -> usize {
+//     20
+// }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub(crate) struct FilterParams {

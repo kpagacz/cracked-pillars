@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  backend:
+    image: 565855251853.dkr.ecr.eu-central-1.amazonaws.com/cracked-pillars-backend:latest
+    container_name: cracked-pillars-backend
+    ports:
+      - "8001:8000"
+    environment:
+      - RUST_LOG=info
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  frontend:
+    image: 565855251853.dkr.ecr.eu-central-1.amazonaws.com/cracked-pillars-frontend:latest
+    container_name: cracked-pillars-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
