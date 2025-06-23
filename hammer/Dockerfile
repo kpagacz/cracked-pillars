@@ -16,18 +16,9 @@ COPY hammer/Cargo.toml hammer/Cargo.lock ./
 # Create a dummy main.rs to build dependencies
 RUN mkdir src && echo "fn main() {}" > src/main.rs
 
-# Build dependencies (this layer will be cached)
-RUN cargo build --release
-
 # Remove the dummy main.rs and copy the actual source code
 RUN rm src/main.rs
 COPY hammer/src ./src
-
-# Build the application
-RUN cargo build --release
-
-# Debug: List the contents of target/release to verify the binary is present
-RUN ls -l target/release/
 
 # Copy the configuration file
 COPY hammer/hammer.toml ./hammer.toml
@@ -47,11 +38,23 @@ RUN mkdir -p /app/migrations
 # Copy the migration files
 COPY hammer/resources/db /app/migrations
 
+# Clean
+RUN cargo clean
+
+# Build the application
+RUN cargo build --release
+
+# Debug: List the contents of target/release to verify the binary is present
+RUN ls -l target/release/
+
 # Copy the compiled binary to /app/hammer
 RUN cp target/release/hammer /app/hammer && chmod +x /app/hammer
 
 # Expose the port the app runs on
 EXPOSE 8000
 
-# Set the entrypoint
-ENTRYPOINT ["/app/hammer --skip-db-sync"]
+# Set the entrypoint to the binary
+ENTRYPOINT ["/app/hammer"]
+
+# Set default command arguments
+CMD ["--skip-db-sync"]

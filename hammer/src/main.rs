@@ -19,8 +19,6 @@ use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 #[tokio::main]
 async fn main() {
-    let args: Vec<_> = std::env::args().collect();
-
     // Initialize tracing
     tracing_subscriber::registry()
         .with(tracing_subscriber::EnvFilter::new(
@@ -29,13 +27,18 @@ async fn main() {
         .with(tracing_subscriber::fmt::layer())
         .init();
 
+    let args: Vec<_> = std::env::args().collect();
+    tracing::debug!("Got arguments to main: {args:?}");
+
     // Remove the db if reset-db parameter is present
     if args.iter().any(|arg| arg.as_str() == "--reset-db") {
+        tracing::debug!("Resetting the database");
         reset_db();
     }
 
     // Synchronize database
     if !args.iter().any(|arg| arg.as_str() == "--skip-db-sync") {
+        tracing::debug!("Synchronizing the database");
         let conn = db::get_connection().expect("Failed to get DB connection");
         db::synchronize_db(&conn).expect("Failed to synchronize DB");
         drop(conn);
@@ -46,6 +49,7 @@ async fn main() {
         .iter()
         .any(|arg| arg.as_str() == "--import-from-quarry")
     {
+        tracing::debug!("Importing abilities and items from JSON files to database");
         import_from_quarry();
         return;
     }
