@@ -1,9 +1,9 @@
-version: "3.8"
-
 services:
   backend:
     image: 565855251853.dkr.ecr.eu-central-1.amazonaws.com/cracked-pillars-backend:latest
     container_name: cracked-pillars-backend
+    volumes:
+      - ./hammer/hammer.db3:/app/data/hammer.db3
     environment:
       - RUST_LOG=debug
     restart: unless-stopped

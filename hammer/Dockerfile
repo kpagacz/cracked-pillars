@@ -49,7 +49,7 @@ COPY hammer/abilities.json hammer/items.json ./
 RUN mkdir -p /app/data
 
 # Copy the existing database file
-COPY hammer/hammer.db3 /app/data/hammer.db3
+# COPY hammer/hammer.db3 /app/data/hammer.db3
 
 # Create the migrations directory
 RUN mkdir -p /app/migrations
@@ -68,6 +68,3 @@ EXPOSE 8000
 
 # Set the entrypoint to the binary
 ENTRYPOINT ["/app/hammer"]
-
-# Set default command arguments
-CMD ["--skip-db-sync"]

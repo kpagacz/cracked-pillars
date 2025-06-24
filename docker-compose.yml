@@ -11,6 +11,7 @@ services:
       # Mount the JSON data files for easy updates
       - ./quarry/post_processed_abilities.json:/app/abilities.json:ro
       - ./quarry/post_processed_items.json:/app/items.json:ro
+      - ./hammer/hammer.db3:/app/data/hammer.db3
     environment:
       - RUST_LOG=hammer=trace,tower_http=trace
     restart: unless-stopped

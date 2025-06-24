@@ -1,5 +1,8 @@
 use crate::error::Error;
-use std::path::{Path, PathBuf};
+use std::{
+    ffi::OsString,
+    path::{Path, PathBuf},
+};
 
 use crate::models::CONFIG;
 use rusqlite::{CachedStatement, Connection, config::DbConfig};
@@ -50,13 +53,25 @@ fn execute_missing_migrations(connection: &Connection) -> Result<(), Error> {
             MIGRATION_TABLE, MIGRATION_FILE_NAME_COLUMN
         ))
         .map_err(|_| "Failed to prepare the cached statement inserting migration files into db")?;
-    files
-        .iter()
-        .filter(|migration_file| !done_migrations.contains(migration_file))
+    let unexecuted_migrations = find_unexecuted_migrations(&files, &done_migrations)?;
+    unexecuted_migrations
+        .into_iter()
         .try_for_each(|migration_file| {
             execute_migration(migration_file, connection)?;
             mark_migration_done(migration_file, &mut stmt)
         })
+}
+
+fn find_unexecuted_migrations<'a>(
+    files: &'a [PathBuf],
+    done_migrations: &'a [OsString],
+) -> Result<Vec<&'a PathBuf>, Error> {
+    Ok(files
+        .iter()
+        .filter(|&file| {
+            !done_migrations.contains(&file.file_name().expect("File name exists").to_os_string())
+        })
+        .collect())
 }
 
 fn list_migration_files() -> Result<Vec<PathBuf>, Error> {
@@ -70,7 +85,7 @@ fn list_migration_files() -> Result<Vec<PathBuf>, Error> {
         .collect()
 }
 
-fn list_done_migrations(connection: &Connection) -> Result<Vec<PathBuf>, Error> {
+fn list_done_migrations(connection: &Connection) -> Result<Vec<OsString>, Error> {
     let mut stmt = connection
         .prepare(&format!(
             "SELECT {} FROM {}",
@@ -88,7 +103,7 @@ fn list_done_migrations(connection: &Connection) -> Result<Vec<PathBuf>, Error> 
         let migration: String = row
             .get(0)
             .map_err(|_| "Failed to get value from the migration row")?;
-        done_migrations.push(PathBuf::from(migration));
+        done_migrations.push(migration.into());
     }
     Ok(done_migrations)
 }
@@ -104,7 +119,7 @@ fn execute_migration(file: &Path, connection: &Connection) -> Result<(), Error> 
 }
 
 fn mark_migration_done(file: &Path, stmt: &mut CachedStatement) -> Result<(), Error> {
-    stmt.execute([&file.to_str().unwrap()])
+    stmt.execute([file.file_name().map(|name| name.to_str()).unwrap()])
         .map_err(|_| "Failed to mark the migration as done")?;
     Ok(())
 }
