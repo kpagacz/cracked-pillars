@@ -6,6 +6,7 @@ import ResultsOverview from "./ResultsOverview";
 import { Item } from "../server-functions/fetchItems";
 import { Suspense, use, useState, useTransition } from "react";
 import { fetchItemsByTags } from "../server-functions/fetchItems";
+import FilterTagsWidgetFallback from "./FilterTagsWidgetFallback";
 
 export default function ExplorePage({
   initialItemsPromise,
@@ -45,10 +46,12 @@ export default function ExplorePage({
           <div className="lg:col-span-1">
             <div className="bg-secondary/70 backdrop-blur-sm border border-border/50 rounded-lg p-6 sticky top-24 shadow-sm">
               <h2 className="text-xl font-semibold text-text mb-4">Filters</h2>
-              <FilterTagsWidget
-                onFilterFormSubmitted={onFilterFormSubmitted}
-                tagsPromise={tags}
-              />
+              <Suspense fallback={<FilterTagsWidgetFallback />}>
+                <FilterTagsWidget
+                  onFilterFormSubmitted={onFilterFormSubmitted}
+                  tagsPromise={tags}
+                />
+              </Suspense>
             </div>
           </div>
 

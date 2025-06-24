@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   # Backend service (Rust API)
   backend:
@@ -14,8 +12,13 @@ services:
       - ./quarry/post_processed_abilities.json:/app/abilities.json:ro
       - ./quarry/post_processed_items.json:/app/items.json:ro
     environment:
-      - RUST_LOG=hammer=info,tower_http=info
+      - RUST_LOG=hammer=trace,tower_http=trace
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
     networks:
       - app-network
 
@@ -29,7 +32,7 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-      - NEXT_TELEMETRY_DISABLED=1
+      - NEXT_TELEMETRY_DISABLED=0
     depends_on:
       - backend
     restart: unless-stopped

@@ -4,7 +4,7 @@ import fetchTags from "./server-functions/fetchTags";
 
 export default function ExplorePageWrapper() {
   const allItems: Promise<Item[]> = fetchAllItems();
+  const tags: Promise<string[]> = fetchTags();
 
-  const tags = fetchTags();
   return <ExplorePage initialItemsPromise={allItems} tags={tags} />;
 }

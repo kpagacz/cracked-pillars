@@ -2,7 +2,6 @@ pub(crate) mod db;
 pub(crate) mod error;
 pub(crate) mod import_from_quarry;
 pub(crate) mod indexing;
-pub(crate) mod middleware;
 pub(crate) mod models;
 pub(crate) mod routes;
 
