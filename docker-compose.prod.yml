@@ -19,7 +19,7 @@ services:
     image: 565855251853.dkr.ecr.eu-central-1.amazonaws.com/cracked-pillars-frontend:latest
     container_name: cracked-pillars-frontend
     ports:
-      - "3000:3000"
+      - "3001:3000"
     depends_on:
       - backend
     restart: unless-stopped
