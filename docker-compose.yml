@@ -25,8 +25,8 @@ services:
   # Frontend service (Next.js)
   frontend:
     build:
-      context: ./chisel
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: chisel/Dockerfile
     container_name: chisel-frontend
     ports:
       - "3000:3000"
