@@ -8,9 +8,6 @@ DOCKER_DEPLOYMENT.md
 plan.md
 LICENSE
 
-# Frontend (chisel)
-chisel/
-
 # Backend build artifacts
 hammer/target/
 hammer/.DS_Store
