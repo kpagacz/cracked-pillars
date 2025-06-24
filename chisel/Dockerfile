@@ -14,6 +14,9 @@ RUN npm ci
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
+
+# Because on github it won't push an empty public directory
+RUN mkdir -p /app/public
 COPY --from=deps /app/node_modules ./node_modules
 COPY chisel .
 
