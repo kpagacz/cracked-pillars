@@ -38,6 +38,7 @@ jobs:
           context: .
           file: ./hammer/Dockerfile
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ env.BACKEND_ECR_URI }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -48,6 +49,7 @@ jobs:
           context: .
           file: ./chisel/Dockerfile
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ env.FRONTEND_ECR_URI }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
