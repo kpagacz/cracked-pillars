@@ -1,4 +1,0 @@
-abilities_path="/app/abilities.json"
-items_path="/app/items.json"
-db_path="/app/data/hammer.db3"
-db_migrations="/app/migrations"
