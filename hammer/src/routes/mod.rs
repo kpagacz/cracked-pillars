@@ -5,10 +5,11 @@ mod indexed;
 mod items;
 mod tags;
 
-use crate::indexing::Index;
+use crate::{auth::auth_required, indexing::Index};
 use axum::{
     Router,
-    routing::{delete, get},
+    handler::Handler,
+    routing::{delete, get, patch},
 };
 
 pub(crate) fn get_backend_routes(
@@ -23,13 +24,27 @@ pub(crate) fn get_backend_routes(
         .route("/abilities", get(abilities::find_all))
         .route(
             "/abilities/{slug}",
-            delete(abilities::delete).patch(abilities::update),
+            delete(abilities::delete.layer(axum::middleware::from_fn(auth_required)))
+                .patch(abilities::update.layer(axum::middleware::from_fn(auth_required))),
         )
-        .route("/items", get(items::find_all).post(items::insert))
+        .route("/abilities/{slug}", get(abilities::find_by_slug))
+        .route(
+            "/abilities/{slug}/tags",
+            patch(abilities::update_tags.layer(axum::middleware::from_fn(auth_required))),
+        )
+        .route(
+            "/items",
+            get(items::find_all)
+                .post(items::insert.layer(axum::middleware::from_fn(auth_required))),
+        )
         .route(
             "/items/{slug}",
             get(items::find_by_slug)
-                .patch(items::update)
-                .delete(items::delete),
+                .patch(items::update.layer(axum::middleware::from_fn(auth_required)))
+                .delete(items::delete.layer(axum::middleware::from_fn(auth_required))),
+        )
+        .route(
+            "/items/{slug}/tags",
+            patch(items::update_tags.layer(axum::middleware::from_fn(auth_required))),
         )
 }

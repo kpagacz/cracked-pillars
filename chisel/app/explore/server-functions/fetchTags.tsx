@@ -1,6 +1,11 @@
 "use server";
 
-export default async function fetchTags(): Promise<string[]> {
+export interface Tag {
+  name: string;
+  description: string;
+}
+
+export default async function fetchTags(): Promise<Tag[]> {
   try {
     const endpoint = `${process.env.SERVER_API_ENDPOINT}/tags`;
     console.log(`[DEBUG] fetchTags called with endpoint: ${endpoint}`);
@@ -16,7 +21,7 @@ export default async function fetchTags(): Promise<string[]> {
       return [];
     }
 
-    const data = (await tags.json()) as string[];
+    const data = (await tags.json()) as Tag[];
     console.log(`[DEBUG] fetchTags successful, got ${data.length} tags`);
     return data;
   } catch (error) {

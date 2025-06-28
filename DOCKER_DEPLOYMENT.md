@@ -1,35 +1,76 @@
 # Docker Deployment Guide
 
-This guide explains how to deploy the Cracked Pillars application using Docker Compose.
+This guide explains how the Cracked Pillars application is deployed to production using Docker, AWS ECR, and EC2.
 
 ## Architecture
 
 The application consists of two main services:
 
 - **Frontend (chisel)**: Next.js application running on port 3000
-- **Backend (hammer)**: Rust Axum API running on port 8001
+- **Backend (hammer)**: Rust Axum API running on port 8001 with SQLite database
 
-## Prerequisites
+## Production Deployment Process
 
-- Docker
-- Docker Compose
+### 1. Image Building and Publishing
 
-## Quick Start
+Images are automatically built and published via GitHub Actions pipeline:
 
-1. **Clone and navigate to the project directory:**
+- **Build Pipeline**: GitHub Actions automatically builds Docker images when code is pushed
+- **ECR Registry**: Images are pushed to AWS ECR registry
+- **Registry URLs**: See `push-images-to-ecr.sh` for the specific ECR repository URLs
+
+### 2. Deployment Branch
+
+A separate deployment branch contains the files needed for production deployment:
+
+- `docker-compose.prod.yml` - Production Docker Compose configuration
+- `hammer.db3` - SQLite database file
+- Other deployment-specific files
+
+### 3. EC2 Deployment
+
+The application is deployed on an EC2 instance with the following setup:
+
+#### Prerequisites
+- EC2 instance with Docker and Docker Compose installed
+- IAM role configured to pull images from ECR
+- Access to the deployment branch
+
+#### Deployment Steps
+
+1. **Log into ECR on the EC2 instance:**
    ```bash
-   cd /path/to/cracked-pillars
+   aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin <ecr-registry-url>
    ```
 
-2. **Build and start the services:**
+2. **Pull the latest images:**
    ```bash
-   docker-compose up --build
+   docker compose -f docker-compose.prod.yml pull
    ```
 
-3. **Access the application:**
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:8001
-   - Health check: http://localhost:8001/health
+3. **Deploy the application:**
+   ```bash
+   docker-compose -f docker-compose.prod.yml up -d
+   ```
+
+### 4. Database Configuration
+
+- **Database Mount**: The SQLite database (`hammer.db3`) is mounted directly onto the backend container
+- **No Backup Strategy**: Currently, there is no automated database backup system in place
+- **Data Persistence**: Database changes are persisted through the volume mount
+
+## Development Setup
+
+For local development, you can use the development Docker Compose configuration:
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd cracked-pillars
+
+# Start development environment
+docker compose up --build -d
+```
 
 ## Service Details
 
@@ -42,12 +83,8 @@ The application consists of two main services:
 ### Backend (hammer)
 - **Port**: 8001
 - **Technology**: Rust with Axum framework
-- **Database**: SQLite with persistent volume storage
+- **Database**: SQLite with direct file mount
 - **Data**: Mounts JSON files for abilities and items
-
-## Data Persistence
-
-The SQLite database is stored in a Docker volume (`hammer_data`) to ensure data persistence across container restarts.
 
 ## Environment Variables
 
@@ -61,116 +98,89 @@ The SQLite database is stored in a Docker volume (`hammer_data`) to ensure data 
 
 ## Useful Commands
 
-### Start services in background
-```bash
-docker-compose up -d --build
-```
-
 ### View logs
 ```bash
 # All services
-docker-compose logs -f
+docker compose -f docker-compose.prod.yml logs -f
 
 # Specific service
-docker-compose logs -f backend
-docker-compose logs -f frontend
+docker compose -f docker-compose.prod.yml logs -f backend
+docker compose -f docker-compose.prod.yml logs -f frontend
 ```
 
 ### Stop services
 ```bash
-docker-compose down
+docker compose -f docker-compose.prod.yml down
 ```
 
-### Stop and remove volumes
+### Restart services
 ```bash
-docker-compose down -v
-```
-
-### Rebuild a specific service
-```bash
-docker-compose build backend
-docker-compose build frontend
+docker compose -f docker-compose.prod.yml restart
 ```
 
 ### Access container shell
 ```bash
-docker-compose exec backend sh
-docker-compose exec frontend sh
-```
-
-## Development
-
-For development, you can override the docker-compose configuration:
-
-```bash
-# Create a development override file
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+docker compose -f docker-compose.prod.yml exec backend sh
+docker compose -f docker-compose.prod.yml exec frontend sh
 ```
 
 ## Troubleshooting
 
-### Port conflicts
-If ports 3000 or 8001 are already in use, modify the port mappings in `docker-compose.yml`:
+### ECR Authentication Issues
+If you encounter authentication issues with ECR:
 
-```yaml
-ports:
-  - "3001:3000"  # Map host port 3001 to container port 3000
+```bash
+# Re-authenticate with ECR
+aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin <ecr-registry-url>
 ```
 
-### Database issues
-If the database becomes corrupted or you need to reset it:
+### Database Issues
+If the database becomes corrupted:
 
 ```bash
 # Stop services
-docker-compose down
+docker compose -f docker-compose.prod.yml down
 
-# Remove the volume
-docker volume rm cracked-pillars_hammer_data
+# Backup current database (if needed)
+cp hammer.db3 hammer.db3.backup
 
-# Restart services
-docker-compose up --build
+# Restart services (will use backup or recreate if needed)
+docker compose -f docker-compose.prod.yml up -d
 ```
 
-### Build issues
-If you encounter build issues:
+### Image Pull Issues
+If images fail to pull:
 
 ```bash
-# Clean Docker cache
-docker system prune -a
+# Check ECR authentication
+aws sts get-caller-identity
 
-# Rebuild without cache
-docker-compose build --no-cache
+# Verify IAM role has ECR permissions
+aws ecr describe-repositories
 ```
 
-## Production Considerations
+## Security Considerations
 
-1. **Security**: The current setup is for development. For production:
-   - Use proper secrets management
-   - Implement HTTPS
-   - Add reverse proxy (nginx)
-   - Configure proper logging
-
-2. **Performance**: Consider:
-   - Using a production database (PostgreSQL, MySQL)
-   - Implementing caching layers
-   - Adding load balancers
-
-3. **Monitoring**: Add:
-   - Health checks
-   - Metrics collection
-   - Log aggregation
+1. **ECR Access**: Ensure EC2 instance has proper IAM role for ECR access
+2. **Database Security**: SQLite database is mounted directly - ensure file permissions are secure
+3. **Network Security**: Configure security groups to restrict access to necessary ports only
+4. **No Backup**: Currently no automated backup strategy - consider implementing one
 
 ## File Structure
 
 ```
 cracked-pillars/
-├── docker-compose.yml          # Main orchestration file
+├── docker-compose.yml          # Development orchestration
+├── docker-compose.prod.yml     # Production orchestration
+├── build-images.sh            # Local image building script
+├── push-images-to-ecr.sh      # ECR push script with registry URLs
 ├── chisel/
 │   ├── Dockerfile             # Frontend container
 │   └── .dockerignore
 ├── hammer/
 │   ├── Dockerfile             # Backend container
 │   ├── .dockerignore
-│   └── hammer.toml            # Configuration
+│   ├── hammer.toml            # Configuration
+│   └── hammer.db3             # SQLite database (in deployment branch)
 └── DOCKER_DEPLOYMENT.md       # This file
 ```

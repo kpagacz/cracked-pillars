@@ -8,16 +8,21 @@ pub(crate) fn insert(item: &Item, conn: &mut Connection) -> Result<(), Error> {
     let mut stmt = tx.prepare(
         "INSERT INTO items (name, slug, wiki_url, effects_description) values (?1, ?2, ?3, ?4)",
     )?;
-    let id = stmt.insert(rusqlite::params![
-        &item.name,
-        &item.slug,
-        &item.wiki_url,
-        &item.effects_description
-    ])?;
+    let id = stmt
+        .insert(rusqlite::params![
+            &item.name,
+            &item.slug,
+            &item.wiki_url,
+            &item.effects_description
+        ])
+        .inspect_err(|err| tracing::warn!("Failed to insert an item into the table. {err:?}"))?;
     drop(stmt);
     let mut stmt = tx.prepare("INSERT INTO items_tags (item_id, tag_name) VALUES (?1, ?2)")?;
     for tag_name in &item.tags {
-        stmt.insert(rusqlite::params![id, tag_name])?;
+        stmt.insert(rusqlite::params![id, tag_name])
+            .inspect_err(|err| {
+                tracing::warn!("Failed to insert {tag_name} to items_tags table. Err: {err:?}")
+            })?;
     }
     drop(stmt);
     tx.commit()?;
@@ -111,4 +116,25 @@ pub(crate) fn find_by_ids(ids: &[i64], conn: &Connection) -> Result<Vec<Persiste
         items.push(from_row(row, conn)?);
     }
     Ok(items)
+}
+
+pub(crate) fn update_tags_by_slug(
+    slug: &str,
+    new_tags: Vec<String>,
+    conn: &mut Connection,
+) -> Result<Vec<String>, Error> {
+    let tx = conn.transaction()?;
+    let mut stmt = tx.prepare_cached(
+        "DELETE FROM items_tags WHERE item_id=(SELECT id FROM items WHERE slug=?1)",
+    )?;
+    stmt.execute([slug])?;
+    drop(stmt);
+
+    let mut stmt = tx.prepare_cached("INSERT INTO items_tags (item_id, tag_name) VALUES ((SELECT id FROM items WHERE slug=?1), ?2)")?;
+    for tag in &new_tags {
+        stmt.execute([slug, tag])?;
+    }
+    drop(stmt);
+    tx.commit()?;
+    Ok(new_tags)
 }

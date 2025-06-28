@@ -5,9 +5,10 @@ export interface Item {
   slug: string;
   tags: string[];
   wiki_url: string;
+  type: "ability" | "item";
 }
 
-interface RawItem {
+export interface RawItem {
   name: string;
   slug: string;
   tags: string[];
@@ -60,6 +61,7 @@ export async function fetchAllItems(): Promise<Item[]> {
         slug: item.slug,
         tags: item.tags,
         wiki_url: item.wiki_url,
+        type: "item",
       };
     });
 
@@ -86,6 +88,7 @@ export async function fetchAllItems(): Promise<Item[]> {
         slug: ability.slug,
         tags: ability.tags,
         wiki_url: ability.wiki_url,
+        type: "ability",
       };
     });
 

@@ -31,4 +31,5 @@ pub(crate) struct Config {
     pub(crate) items_path: String,
     pub(crate) db_path: String,
     pub(crate) db_migrations: String,
+    pub(crate) auth_secret: String,
 }

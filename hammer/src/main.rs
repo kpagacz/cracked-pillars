@@ -1,3 +1,4 @@
+pub(crate) mod auth;
 pub(crate) mod db;
 pub(crate) mod error;
 pub(crate) mod import_from_quarry;
@@ -18,6 +19,8 @@ use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 #[tokio::main]
 async fn main() {
+    let args: Vec<_> = std::env::args().collect();
+
     // Initialize tracing
     tracing_subscriber::registry()
         .with(tracing_subscriber::EnvFilter::new(
@@ -26,29 +29,21 @@ async fn main() {
         .with(tracing_subscriber::fmt::layer())
         .init();
 
-    let args: Vec<_> = std::env::args().collect();
-    tracing::debug!("Got arguments to main: {args:?}");
-
     // Remove the db if reset-db parameter is present
     if args.iter().any(|arg| arg.as_str() == "--reset-db") {
-        tracing::debug!("Resetting the database");
         reset_db();
     }
 
     // Synchronize database
-    if !args.iter().any(|arg| arg.as_str() == "--skip-db-sync") {
-        tracing::debug!("Synchronizing the database");
-        let conn = db::get_connection().expect("Failed to get DB connection");
-        db::synchronize_db(&conn).expect("Failed to synchronize DB");
-        drop(conn);
-    }
+    let conn = db::get_connection().expect("Failed to get DB connection");
+    db::synchronize_db(&conn).expect("Failed to synchronize DB");
+    drop(conn);
 
     // Import files to database if needed
     if args
         .iter()
         .any(|arg| arg.as_str() == "--import-from-quarry")
     {
-        tracing::debug!("Importing abilities and items from JSON files to database");
         import_from_quarry();
         return;
     }
@@ -62,7 +57,10 @@ async fn main() {
 
     let app = Router::<()>::new()
         .route("/health", get(|| async { StatusCode::OK }))
-        .nest("/api", get_backend_routes(abilities_index, items_index))
+        .nest(
+            "/api",
+            get_backend_routes(abilities_index, items_index).merge(auth::auth_routes()),
+        )
         .layer(ServiceBuilder::new().layer(TraceLayer::new_for_http()));
 
     // Run it
@@ -83,6 +81,8 @@ fn import_from_quarry() {
 fn reset_db() {
     match std::fs::remove_file(&CONFIG.db_path) {
         Ok(_) => tracing::debug!("Removed the database"),
-        Err(_) => tracing::warn!("Failed to remove the database. Remove the db file manually."),
+        Err(err) => tracing::warn!(
+            "Failed to remove the database. Remove the db file manually. Error: {err}"
+        ),
     }
 }

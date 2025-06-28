@@ -1,6 +1,7 @@
 -- Effect tags
 CREATE TABLE tags (
-    name TEXT NOT NULL PRIMARY KEY
+    name TEXT NOT NULL PRIMARY KEY,
+    description TEXT
 );
 
 -- Abilities

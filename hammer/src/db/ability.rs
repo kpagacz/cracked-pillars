@@ -42,23 +42,20 @@ pub(crate) fn insert_abbreviated_ability(ability: &AbbreviatedAbility) -> Result
     let tx = conn.transaction().map_err(|e| {
         format!("Failed to start transaction for inserting abbreviated ability: {e:?}")
     })?;
-    let mut stmt = tx
-        .prepare("INSERT INTO abilities (name, slug, url) values (?1, ?2, ?3)")
-        .map_err(|e| format!("Failed to prepare the statement: {e:?}"))?;
+    let mut stmt = tx.prepare("INSERT INTO abilities (name, slug, url) values (?1, ?2, ?3)")?;
     let id = stmt
         .insert(rusqlite::params![
             &ability.name,
             &ability.slug,
             &ability.wiki_url
         ])
-        .map_err(|e| format!("Failed to insert ability {ability:?}: {e:?}"))?;
+        .inspect_err(|err| tracing::warn!("Failed to insert ability into table. {err:?}"))?;
     drop(stmt);
-    let mut stmt = tx
-        .prepare("INSERT INTO abilities_tags (ability_id, tag_name) VALUES (?1, ?2)")
-        .map_err(|e| format!("Failed to prepare the statement: {e:?}"))?;
+    let mut stmt =
+        tx.prepare("INSERT INTO abilities_tags (ability_id, tag_name) VALUES (?1, ?2)")?;
     for tag in &ability.tags {
         stmt.insert(rusqlite::params![id, tag])
-            .map_err(|e| format!("Failed to insert ability tag: {e:?}"))?;
+            .inspect_err(|err| tracing::warn!("Failed to insert abilities tag {tag}. {err:?}"))?;
     }
     drop(stmt);
     tx.commit()?;
@@ -159,4 +156,36 @@ pub(crate) fn update_abbreviated_ability_by_slug(
     drop(stmt);
     tx.commit()?;
     Ok(())
+}
+
+pub(crate) fn update_tags_by_slug(
+    slug: &str,
+    new_tags: Vec<String>,
+    conn: &mut Connection,
+) -> Result<Vec<String>, Error> {
+    let tx = conn.transaction()?;
+
+    let mut stmt = tx.prepare_cached(
+        "DELETE FROM abilities_tags WHERE ability_id=(SELECT id FROM abilities WHERE slug=?1)",
+    )?;
+    stmt.execute([slug])?;
+    drop(stmt);
+
+    let mut stmt = tx.prepare_cached("INSERT INTO abilities_tags (ability_id, tag_name) VALUES ((SELECT id FROM abilities WHERE slug=?1), ?2)")?;
+    for tag in &new_tags {
+        stmt.execute([slug, tag])?;
+    }
+    drop(stmt);
+    tx.commit()?;
+
+    Ok(new_tags)
+}
+
+pub(crate) fn find_by_slug(
+    slug: &str,
+    conn: &Connection,
+) -> Result<Option<PersistedAbbreviatedAbility>, Error> {
+    let mut stmt = conn.prepare_cached("SELECT * FROM abilities WHERE slug=?1")?;
+    let mut row = stmt.query([slug])?;
+    Ok(row.next()?.and_then(|row| from_row(row, conn).ok()))
 }

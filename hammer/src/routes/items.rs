@@ -50,3 +50,16 @@ pub(super) async fn insert(Json(item): Json<JsonItem>) -> Result<StatusCode, Err
     item::insert(&item, &mut conn)?;
     Ok(StatusCode::CREATED)
 }
+
+#[axum::debug_handler]
+#[tracing::instrument(level = "trace")]
+pub(super) async fn update_tags(
+    Path(slug): Path<String>,
+    Json(new_tags): Json<Vec<String>>,
+) -> Result<Json<Vec<String>>, Error> {
+    let mut conn = db::get_connection()?;
+    let new_tags = item::update_tags_by_slug(&slug, new_tags, &mut conn).inspect_err(|err| {
+        tracing::warn!("Error when trying to update tags for the item {slug}. Error: {err:?}")
+    })?;
+    Ok(Json(new_tags))
+}

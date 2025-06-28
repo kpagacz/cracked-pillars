@@ -1,4 +1,4 @@
-use crate::error::Error;
+use crate::error::{Error, ErrorType};
 use std::{
     ffi::OsString,
     path::{Path, PathBuf},
@@ -77,12 +77,18 @@ fn find_unexecuted_migrations<'a>(
 fn list_migration_files() -> Result<Vec<PathBuf>, Error> {
     let paths = std::fs::read_dir(&CONFIG.db_migrations)
         .map_err(|_| "Failed to read migration directory")?;
-    paths
+    let mut migration_files: Vec<_> = paths
         .map(|res| {
-            res.map(|entry| entry.path())
-                .map_err(|e| format!("Failed to process directory entry: {}", e).into())
+            res.map(|entry| entry.path()).map_err(|e| {
+                Error(
+                    format!("Failed to process directory entry: {}", e),
+                    ErrorType::Runtime,
+                )
+            })
         })
-        .collect()
+        .collect::<Result<Vec<_>, Error>>()?;
+    migration_files.sort();
+    Ok(migration_files)
 }
 
 fn list_done_migrations(connection: &Connection) -> Result<Vec<OsString>, Error> {

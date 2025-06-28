@@ -7,14 +7,16 @@ import {
   useState,
 } from "react";
 
+import { Tag } from "../server-functions/fetchTags";
+
 export function FilterTagsWidget({
   onFilterFormSubmitted,
   tagsPromise,
 }: {
   onFilterFormSubmitted: (payload: string[]) => void;
-  tagsPromise: Promise<string[]>;
+  tagsPromise: Promise<Tag[]>;
 }) {
-  const tags = use(tagsPromise);
+  const tags = use(tagsPromise).map((tag) => tag.name);
   const [searchedTags, setSearchedTags] = useState<string[]>([]);
   const [searchText, setSearchText] = useState<string>("");
   const [recommendedTags, setRecommendedTags] = useState<string[]>(tags);
@@ -68,9 +70,6 @@ export function FilterTagsWidget({
             autoFocus
             onChange={onSearchedTagChanged}
             value={searchText}
-            onBlur={(e) => {
-              e.target.focus();
-            }}
             className="w-full px-4 py-3 bg-primary/50 border border-border/50 rounded-lg text-text placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-highlight focus:border-transparent transition-all duration-200"
           />
         </div>
@@ -133,7 +132,7 @@ export function FilterTagsWidget({
   );
 }
 
-function Tag({
+function TagPill({
   tag,
   onTagAdded,
 }: {
@@ -170,15 +169,10 @@ function TagList({
   }
 
   return (
-    <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto">
-      {tags.slice(0, 20).map((tag) => {
-        return <Tag key={tag} tag={tag} onTagAdded={onTagAdded} />;
+    <div className="flex flex-wrap gap-2 max-h-96 overflow-y-auto">
+      {tags.map((tag) => {
+        return <TagPill key={tag} tag={tag} onTagAdded={onTagAdded} />;
       })}
-      {tags.length > 20 && (
-        <div className="text-text-muted text-xs italic">
-          +{tags.length - 20} more tags
-        </div>
-      )}
     </div>
   );
 }
