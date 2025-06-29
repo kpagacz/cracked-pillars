@@ -15,6 +15,16 @@ RUN npm ci
 FROM base AS builder
 WORKDIR /app
 
+# Accept build arguments
+ARG NEXT_PUBLIC_API_ENDPOINT
+ARG NEXT_PUBLIC_GOOGLE_CLIENT_ID
+ARG SERVER_API_ENDPOINT
+
+# Set environment variables for the build
+ENV NEXT_PUBLIC_API_ENDPOINT=$NEXT_PUBLIC_API_ENDPOINT
+ENV NEXT_PUBLIC_GOOGLE_CLIENT_ID=$NEXT_PUBLIC_GOOGLE_CLIENT_ID
+ENV SERVER_API_ENDPOINT=$SERVER_API_ENDPOINT
+
 # Because on github it won't push an empty public directory
 RUN mkdir -p /app/public
 COPY --from=deps /app/node_modules ./node_modules
@@ -49,8 +59,16 @@ RUN chown nextjs:nodejs .next
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Copy environment file
-COPY --from=builder --chown=nextjs:nodejs /app/.env.production ./.env.production
+# Accept build arguments in runner stage
+ARG NEXT_PUBLIC_API_ENDPOINT
+ARG NEXT_PUBLIC_GOOGLE_CLIENT_ID
+ARG SERVER_API_ENDPOINT
+
+# Create .env.production file with the environment variables
+RUN echo "NEXT_PUBLIC_API_ENDPOINT=$NEXT_PUBLIC_API_ENDPOINT" > .env.production && \
+    echo "NEXT_PUBLIC_GOOGLE_CLIENT_ID=$NEXT_PUBLIC_GOOGLE_CLIENT_ID" >> .env.production && \
+    echo "SERVER_API_ENDPOINT=$SERVER_API_ENDPOINT" >> .env.production && \
+    chown nextjs:nodejs .env.production
 
 USER nextjs
 
