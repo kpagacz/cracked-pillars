@@ -20,14 +20,16 @@ export const AuthContext = createContext<AuthContextType>({
 
 export function AuthContextProvider({
   children,
+  initialAuth = null,
 }: {
   children: React.ReactNode;
+  initialAuth?: InnerAuth | null;
 }) {
-  const [authContext, setAuthContext] = useState<null | InnerAuth>(null);
+  const [authContext, setAuthContext] = useState<null | InnerAuth>(initialAuth);
 
   return (
-    <AuthContext value={{ authContext, setAuthContext }}>
+    <AuthContext.Provider value={{ authContext, setAuthContext }}>
       {children}
-    </AuthContext>
+    </AuthContext.Provider>
   );
 }

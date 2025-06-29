@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
-import { AuthContextProvider } from "./_login/AuthContext";
+import { ServerAuthProvider } from "./_login/ServerAuthProvider";
 import { AuthSection } from "./_login/AuthSection";
 
 const geistSans = Geist({
@@ -34,8 +34,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased text-text min-h-screen`}
       >
-        <AuthContextProvider>
-          <div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col">
+          <ServerAuthProvider>
             <header className="bg-secondary/90 backdrop-blur-sm border-b border-border/50 sticky top-0 z-50 shadow-sm">
               <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
@@ -75,8 +75,8 @@ export default function RootLayout({
                 </div>
               </div>
             </footer>
-          </div>
-        </AuthContextProvider>
+          </ServerAuthProvider>
+        </div>
       </body>
     </html>
   );

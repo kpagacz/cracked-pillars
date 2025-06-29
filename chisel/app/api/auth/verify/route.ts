@@ -24,12 +24,12 @@ export async function GET(request: NextRequest) {
         status: 401,
       });
     }
-    let body = await backendResponse.json();
-    body.jwt = cookie.value;
+    const body = await backendResponse.json();
+    const responseBody = { ...body, jwt: cookie.value };
 
     return NextResponse.json({
       success: true,
-      body: body,
+      body: responseBody,
     });
   } catch (error) {
     console.error("Error verifying user:", error);

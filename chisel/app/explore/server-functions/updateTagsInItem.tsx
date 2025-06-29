@@ -23,7 +23,7 @@ export async function updateTagsInItem(item: Item, jwt: string): Promise<Item> {
       return item;
     }
 
-    let body = await fetch(
+    const body = await fetch(
       `${config.SERVER_API_ENDPOINT}/${itemOrAbility}/${item.slug}`,
       {
         method: "GET",
@@ -38,7 +38,7 @@ export async function updateTagsInItem(item: Item, jwt: string): Promise<Item> {
       );
       return item;
     }
-    let rawItem = await body.json();
+    const rawItem = await body.json();
     return {
       name: rawItem.name,
       slug: rawItem.slug,

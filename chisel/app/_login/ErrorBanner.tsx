@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 export function ErrorBanner({
   message,
@@ -17,6 +17,14 @@ export function ErrorBanner({
 }) {
   const [isAnimating, setIsAnimating] = useState(false);
 
+  const handleClose = useCallback(() => {
+    setIsAnimating(true);
+    setTimeout(() => {
+      onClose();
+      setIsAnimating(false);
+    }, 300);
+  }, [onClose]);
+
   useEffect(() => {
     if (isVisible && autoHide) {
       const timer = setTimeout(() => {
@@ -24,15 +32,7 @@ export function ErrorBanner({
       }, autoHideDelay);
       return () => clearTimeout(timer);
     }
-  }, [isVisible, autoHide, autoHideDelay]);
-
-  const handleClose = () => {
-    setIsAnimating(true);
-    setTimeout(() => {
-      onClose();
-      setIsAnimating(false);
-    }, 300);
-  };
+  }, [isVisible, autoHide, autoHideDelay, handleClose]);
 
   const getTypeStyles = () => {
     switch (type) {
