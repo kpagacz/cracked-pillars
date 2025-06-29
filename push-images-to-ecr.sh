@@ -11,7 +11,7 @@ BACKEND_REMOTE_IMAGE="$BACKEND_ECR_URI:latest"
 FRONTEND_REMOTE_IMAGE="$FRONTEND_ECR_URI:latest"
 
 # Authenticate Docker to your ECR registry
-aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin 565855251853.dkr.ecr.eu-central-1.amazonaws.com
+aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 565855251853.dkr.ecr.eu-central-1.amazonaws.com
 
 echo "Pushing backend image..."
 docker tag $BACKEND_LOCAL_IMAGE $BACKEND_REMOTE_IMAGE
