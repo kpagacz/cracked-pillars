@@ -6,6 +6,7 @@ services:
       - ./hammer/hammer.db3:/app/data/hammer.db3
     environment:
       - RUST_LOG=debug
+    env_file: "./hammer/.env.production"
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
@@ -18,8 +19,9 @@ services:
   frontend:
     image: 565855251853.dkr.ecr.eu-central-1.amazonaws.com/cracked-pillars-frontend:latest
     container_name: cracked-pillars-frontend
+    env_file: "./chisel/.env.production"
     ports:
-      - "3001:3000"
+      - "3000:3000"
     depends_on:
       - backend
     restart: unless-stopped
