@@ -44,6 +44,7 @@ jobs:
 
   build-and-push-frontend:
     runs-on: ubuntu-latest
+    environment: production
 
     steps:
       - name: Checkout code
