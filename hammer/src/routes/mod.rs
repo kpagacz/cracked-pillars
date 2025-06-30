@@ -1,25 +1,18 @@
-use std::sync::Arc;
-
 mod abilities;
 mod indexed;
 mod items;
 mod tags;
 
-use crate::{auth::auth_required, indexing::Index};
+use crate::auth::auth_required;
 use axum::{
     Router,
     handler::Handler,
     routing::{delete, get, patch},
 };
 
-pub(crate) fn get_backend_routes(
-    abilities_index: Arc<Index>,
-    items_index: Arc<Index>,
-) -> Router<()> {
+pub(crate) fn get_backend_routes() -> Router<()> {
     Router::new()
         .route("/indexed", get(indexed::get))
-        .with_state(abilities_index)
-        .with_state(items_index)
         .route("/tags", get(tags::get))
         .route("/abilities", get(abilities::find_all))
         .route(
