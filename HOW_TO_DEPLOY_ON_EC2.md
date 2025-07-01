@@ -50,19 +50,19 @@ The application is deployed on an EC2 instance with the following setup:
 1. **Log into ECR on the EC2 instance:**
 
    ```bash
-   aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 565855251853.dkr.ecr.eu-central-1.amazonaws.com
+   sudo aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 565855251853.dkr.ecr.eu-central-1.amazonaws.com
    ```
 
 2. **Pull the latest images:**
 
    ```bash
-   docker compose -f docker-compose.prod.yml pull
+   sudo docker compose -f docker-compose.prod.yml pull
    ```
 
 3. **Deploy the application:**
 
    ```bash
-   docker-compose -f docker-compose.prod.yml up -d
+   sudo docker-compose -f docker-compose.prod.yml up -d
    ```
 
 ### 4. Database Configuration
